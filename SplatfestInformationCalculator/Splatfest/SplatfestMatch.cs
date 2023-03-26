@@ -17,6 +17,8 @@ namespace SplatfestInformationCalculator.Splatfest
 
 		public SplatfestLobbyType Lobby;
 
+		public bool IsMirror;
+
 		private SplatfestLobbyType mapLobbyType(string lobbyKey)
 		{
 			switch (lobbyKey)
@@ -40,6 +42,9 @@ namespace SplatfestInformationCalculator.Splatfest
 		{
 			CloutDiff = (int)jsonData["clout_change"]!;
 			FestPower = (int?)jsonData["fest_power"];
+
+			IsMirror = jsonData["our_team_theme"]!.ToString() == jsonData["their_team_theme"]!.ToString();
+
 			Lobby = mapLobbyType(jsonData["lobby"]!["key"]!.ToString());
 		}
 
