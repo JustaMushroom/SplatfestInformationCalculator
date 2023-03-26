@@ -11,7 +11,6 @@ namespace SplatfestInformationCalculator
 {
 	public class Match
 	{
-		[JsonPropertyName("result")]
 		public string result;
 
 		public bool? Victory
