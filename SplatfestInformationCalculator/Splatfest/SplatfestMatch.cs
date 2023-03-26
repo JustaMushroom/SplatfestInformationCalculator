@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using SplatfestInformationCalculator.Helper.SplatfestJSON;
 using SplatfestInformationCalculator.Splatfest.Generics;
 
 namespace SplatfestInformationCalculator.Splatfest

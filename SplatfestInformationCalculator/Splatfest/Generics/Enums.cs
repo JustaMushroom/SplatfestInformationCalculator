@@ -12,4 +12,9 @@ namespace SplatfestInformationCalculator.Splatfest.Generics
 		SPLATFEST_OPEN,
 		SPLATFEST_PRO
 	}
+	public enum TricolorTeam
+	{
+		ATTACKER,
+		DEFENDER
+	}
 }
