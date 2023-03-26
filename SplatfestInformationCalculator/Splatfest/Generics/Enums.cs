@@ -17,4 +17,12 @@ namespace SplatfestInformationCalculator.Splatfest.Generics
 		ATTACKER,
 		DEFENDER
 	}
+
+	public enum SplatfestMatchMultiplier
+	{
+		ONE_TIMES,
+		TEN_TIMES,
+		ONEHUNDRED_TIMES,
+		THREETHREETHREE_TIMES
+	}
 }
