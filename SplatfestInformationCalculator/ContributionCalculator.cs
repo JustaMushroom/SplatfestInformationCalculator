@@ -190,6 +190,7 @@ namespace SplatfestInformationCalculator
                     return match.CloutDiff - ((theirClout + thirdClout) / 2);
                 }
             }
+            return 0;
         }
     }
 }
