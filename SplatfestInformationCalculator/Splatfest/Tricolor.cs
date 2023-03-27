@@ -69,7 +69,21 @@ namespace SplatfestInformationCalculator.Splatfest
 			return 0; // Why does visual studio force me to add this?
 		}
 
-		private int calculateTeamSignalAttempts(JsonNode jsonData, string keyName, TricolorTeam teamType)
+        public float GetTeamSignals(TricolorTeamCtxType team)
+        {
+            switch (team)
+            {
+                case TricolorTeamCtxType.OUR_TEAM:
+                    return OurSignalAttempts;
+                case TricolorTeamCtxType.THEIR_TEAM:
+                    return TheirSignalAttempts;
+                case TricolorTeamCtxType.THIRD_TEAM:
+                    return ThirdSignalAttempts;
+            }
+            return 0; // Why does visual studio force me to add this?
+        }
+
+        private int calculateTeamSignalAttempts(JsonNode jsonData, string keyName, TricolorTeam teamType)
 		{
 			int sigs = 0;
 
