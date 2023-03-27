@@ -11,14 +11,14 @@ namespace SplatfestInformationCalculator
 {
 	public class Match
 	{
-		public string result;
+		public string Result { get; private set; }
 
 		public bool? Victory
 		{
 			get
 			{
-				if (result == "draw") return null;
-				return result == "win";
+				if (Result == "draw") return null;
+				return Result == "win";
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace SplatfestInformationCalculator
 			OriginalData = jsonData;
 
 			// Map json parameters to fields
-			result = jsonData["result"]!.ToString();
+			Result = jsonData["result"]!.ToString();
 			MyInked = (int)jsonData["inked"]!;
 			OurTeamInked = (int)jsonData["our_team_inked"]!;
 			OurTeamPercent = float.Parse(jsonData["our_team_percent"]!.ToString());
