@@ -18,6 +18,10 @@ namespace SplatfestInformationCalculator.Splatfest
 
 		public int MySignalAttempts;
 
+		public int OurSignalAttempts;
+		public int TheirSignalAttempts;
+		public int ThirdSignalAttempts;
+
 		public TriTeamContext TeamContext;
 
 		public TriThemeContext ThemeContext;
@@ -36,6 +40,49 @@ namespace SplatfestInformationCalculator.Splatfest
 					}
 			}
 			return null;
+		}
+
+		public TricolorTeamCtxType? GetOtherAttacker()
+		{
+			if (TeamContext.TheirTeam == TricolorTeam.ATTACKER)
+			{
+				return TricolorTeamCtxType.THEIR_TEAM;
+			}
+			else if (TeamContext.ThirdTeam == TricolorTeam.ATTACKER)
+			{
+				return TricolorTeamCtxType.THIRD_TEAM;
+			}
+			return null;
+		}
+
+		public float GetTeamPercent(TricolorTeamCtxType team)
+		{
+			switch (team)
+			{
+				case TricolorTeamCtxType.OUR_TEAM:
+					return OurTeamPercent;
+				case TricolorTeamCtxType.THEIR_TEAM:
+					return TheirTeamPercent;
+				case TricolorTeamCtxType.THIRD_TEAM:
+					return ThirdTeamPercent;
+			}
+			return 0; // Why does visual studio force me to add this?
+		}
+
+		private int calculateTeamSignalAttempts(JsonNode jsonData, string keyName, TricolorTeam teamType)
+		{
+			int sigs = 0;
+
+			int teamMembers = 2;
+
+			if (teamType == TricolorTeam.DEFENDER) teamMembers = 4;
+
+			for (int i = 0; i < teamMembers; i++)
+			{
+				sigs += (int)jsonData[keyName]![i]!["signal"]!;
+			}
+
+			return sigs;
 		}
 
 		public TricolorMatch(JsonNode jsonData): base(jsonData)
@@ -57,6 +104,10 @@ namespace SplatfestInformationCalculator.Splatfest
 				TheirTeam = jsonData["their_team_theme"]!.ToString(),
 				ThirdTeam = jsonData["third_team_theme"]!.ToString()
 			};
+
+			OurSignalAttempts = calculateTeamSignalAttempts(jsonData, "our_team_members", TeamContext.OurTeam);
+			TheirSignalAttempts = calculateTeamSignalAttempts(jsonData, "their_team_members", TeamContext.TheirTeam);
+			ThirdSignalAttempts = calculateTeamSignalAttempts(jsonData, "third_team_members", TeamContext.ThirdTeam);
 		}
 	}
 }

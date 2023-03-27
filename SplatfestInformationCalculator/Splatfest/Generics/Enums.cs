@@ -25,4 +25,11 @@ namespace SplatfestInformationCalculator.Splatfest.Generics
 		ONEHUNDRED_TIMES,
 		THREETHREETHREE_TIMES
 	}
+
+	public enum TricolorTeamCtxType
+	{
+		OUR_TEAM,
+		THEIR_TEAM,
+		THIRD_TEAM
+	}
 }
