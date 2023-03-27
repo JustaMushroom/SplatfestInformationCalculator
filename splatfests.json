@@ -1,0 +1,89 @@
+{
+	"fests": [
+		{
+			"prompt": "Which is the best?",
+			"timing":
+			{
+				"start": null,
+				"end": null
+			},
+			"options": [
+				"Rock",
+				"Paper",
+				"Scissors"
+			],
+			"halftime_1st": "Scissors"
+		},
+		{
+			"prompt": "What would you bring to a deserted island?",
+			"timing":
+			{
+				"start": 1663977600,
+				"end": 1664150400
+			},
+			"options": [
+				"Gear",
+				"Grub",
+				"Fun"
+			],
+			"halftime_1st": "Fun"
+		},
+		{
+			"prompt": "What's your partner Pokémon type?",
+			"timing":
+			{
+				"start": 1668211200,
+				"end": 1668384000
+			},
+			"options": [
+				"Grass",
+				"Fire",
+				"Water"
+			],
+			"halftime_1st": "Water"
+		},
+		{
+			"prompt": "What's your favorite taste sensation?",
+			"timing":
+			{
+				"start": 1673049600,
+				"end": 1673222400
+			},
+			"options":
+			[
+				"Spicy",
+				"Sweet",
+				"Sour"
+			],
+			"halftime_1st": "Sweet"
+		},
+		{
+			"prompt": "What's your favorite chocolate?",
+			"timing":
+			{
+				"start": 1676073600,
+				"end": 1676246400
+			},
+			"options": [
+				"Dark Chocolate",
+				"Milk Chocolate",
+				"White Chocolate"
+			],
+			"halftime_1st": "White Chocolate"
+		},
+		{
+			"prompt": "Which of these is real?",
+			"timing":
+			{
+				"start": 1680307200,
+				"end": 1680480000
+			},
+			"options": [
+				"Nessie",
+				"Aliens",
+				"Bigfoot"
+			],
+			"halftime_1st": null
+		}
+	]
+}
