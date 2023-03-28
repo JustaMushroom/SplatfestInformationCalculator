@@ -95,22 +95,43 @@ namespace SplatfestInformationCalculator
 
 		private async void LoadMatches(string Username, SplatfestData data)
 		{
+			loadLogTextBox.Text += "Loading matches for " + Username + "..." + Environment.NewLine;
+			dataGridView1.Rows.Clear();
 			string URL = "https://stat.ink/@" + Username + "/spl3/index.json?f[lobby]=@splatfest&f[rule]=&f[map]=&f[weapon]=&f[result]=&f[knockout]=&f[term]=term&f[term_from]=" + data.Start.ToString("yyyy-MM-dd HH:mm:ss") + "&f[term_to]=" + data.End.ToString("yyyy-MM-dd HH:mm:ss");
 			string encodedURL = HttpUtility.UrlEncode(URL);
 
-			HttpResponseMessage response = await client.GetAsync(encodedURL);
-
-			response.EnsureSuccessStatusCode();
-
-			string jsonStr = await response.Content.ReadAsStringAsync();
+			bool error = true;
+			HttpResponseMessage response;
+			string jsonStr = "{}";
+			while (error)
+			{
+				try
+				{
+					loadLogTextBox.Text += "Requesting matches from stat.ink" + Environment.NewLine;
+					response = await client.GetAsync(URL);
+					response.EnsureSuccessStatusCode();
+					jsonStr = await response.Content.ReadAsStringAsync();
+					error = false;
+				}
+				catch (HttpRequestException)
+				{
+					loadLogTextBox.Text += "HTTP request error! Retrying..." + Environment.NewLine;
+					Thread.Sleep(2500);
+				}
+			}
 
 			JsonNode matchListNode = JsonNode.Parse(jsonStr)!;
 
+			loadLogTextBox.Text += "Received " + matchListNode!.AsArray().Count + " matches from stat.ink" + Environment.NewLine;
+
 			List<Match> matches = new List<Match>();
-			
+
+			loadLogTextBox.Text += "Parsing matches..." + Environment.NewLine;
 			foreach (JsonNode node in matchListNode!.AsArray())
 			{
 				if (node == null) continue;
+
+				if (node["our_team_percent"] == null) continue;
 
 				SplatfestMatch m;
 
@@ -132,9 +153,11 @@ namespace SplatfestInformationCalculator
 					lobby = "TRICOLOR";
 				}
 				float cont = 0;
-				row.SetValues(new object[] { m.MatchID, m.Victory, m.Kills, m.Deaths, m.Kills / m.Deaths, cont });
+				row.SetValues(new object[] { m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, (float)(m.Kills / m.Deaths), cont });
 			}
-        }
+
+			loadLogTextBox.Text += "Matches successfully loaded!" + Environment.NewLine;
+		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{

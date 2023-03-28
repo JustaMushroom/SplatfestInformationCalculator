@@ -14,7 +14,7 @@ namespace SplatfestInformationCalculator.Splatfest
 	{
 		public int CloutDiff;
 
-		public int? FestPower;
+		public float? FestPower;
 
 		public SplatfestLobbyType Lobby;
 
@@ -68,7 +68,7 @@ namespace SplatfestInformationCalculator.Splatfest
 		public SplatfestMatch(JsonNode jsonData) : base(jsonData)
 		{
 			CloutDiff = (int)jsonData["clout_change"]!;
-			FestPower = (int?)jsonData["fest_power"];
+			FestPower = (float?)jsonData["fest_power"];
 
 			IsMirror = jsonData["our_team_theme"]!.ToString() == jsonData["their_team_theme"]!.ToString();
 

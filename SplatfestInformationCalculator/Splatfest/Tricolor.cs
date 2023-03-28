@@ -93,7 +93,9 @@ namespace SplatfestInformationCalculator.Splatfest
 
 			for (int i = 0; i < teamMembers; i++)
 			{
-				sigs += (int)jsonData[keyName]![i]!["signal"]!;
+				int? signals = (int?)jsonData[keyName]![i]!["signal"]!;
+				if (signals == null) continue;
+				sigs += (int)signals;
 			}
 
 			return sigs;
