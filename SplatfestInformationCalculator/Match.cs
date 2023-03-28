@@ -11,6 +11,7 @@ namespace SplatfestInformationCalculator
 {
 	public class Match
 	{
+		public string MatchID;
 		public string Result { get; private set; }
 
 		public bool? Victory
@@ -56,6 +57,7 @@ namespace SplatfestInformationCalculator
 			OriginalData = jsonData;
 
 			// Map json parameters to fields
+			MatchID = jsonData["id"]!.ToString();
 			Result = jsonData["result"]!.ToString();
 			MyInked = (int)jsonData["inked"]!;
 			OurTeamInked = (int)jsonData["our_team_inked"]!;
