@@ -32,18 +32,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.MatchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsVictory = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.K = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cont = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loadLogTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.splatfestComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.MatchID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Victory = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Kills = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deaths = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KDR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Contribution = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -95,11 +95,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MatchID,
-            this.IsVictory,
-            this.K,
-            this.D,
-            this.KD,
-            this.Cont});
+            this.Victory,
+            this.Kills,
+            this.Deaths,
+            this.KDR,
+            this.Contribution});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
@@ -107,42 +107,6 @@
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(786, 416);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // MatchID
-            // 
-            this.MatchID.HeaderText = "Match ID";
-            this.MatchID.Name = "MatchID";
-            this.MatchID.ReadOnly = true;
-            // 
-            // IsVictory
-            // 
-            this.IsVictory.HeaderText = "Won";
-            this.IsVictory.Name = "IsVictory";
-            this.IsVictory.ReadOnly = true;
-            // 
-            // K
-            // 
-            this.K.HeaderText = "Kills";
-            this.K.Name = "K";
-            this.K.ReadOnly = true;
-            // 
-            // D
-            // 
-            this.D.HeaderText = "Deaths";
-            this.D.Name = "D";
-            this.D.ReadOnly = true;
-            // 
-            // KD
-            // 
-            this.KD.HeaderText = "KDR";
-            this.KD.Name = "KD";
-            this.KD.ReadOnly = true;
-            // 
-            // Cont
-            // 
-            this.Cont.HeaderText = "Contribution";
-            this.Cont.Name = "Cont";
-            this.Cont.ReadOnly = true;
             // 
             // loadLogTextBox
             // 
@@ -198,6 +162,42 @@
             this.label2.Text = "Selected Splatfest:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // MatchID
+            // 
+            this.MatchID.HeaderText = "Match ID";
+            this.MatchID.Name = "MatchID";
+            this.MatchID.ReadOnly = true;
+            // 
+            // Victory
+            // 
+            this.Victory.HeaderText = "Won";
+            this.Victory.Name = "Victory";
+            this.Victory.ReadOnly = true;
+            // 
+            // Kills
+            // 
+            this.Kills.HeaderText = "Kills";
+            this.Kills.Name = "Kills";
+            this.Kills.ReadOnly = true;
+            // 
+            // Deaths
+            // 
+            this.Deaths.HeaderText = "Deaths";
+            this.Deaths.Name = "Deaths";
+            this.Deaths.ReadOnly = true;
+            // 
+            // KDR
+            // 
+            this.KDR.HeaderText = "KDR";
+            this.KDR.Name = "KDR";
+            this.KDR.ReadOnly = true;
+            // 
+            // Contribution
+            // 
+            this.Contribution.HeaderText = "Contribution";
+            this.Contribution.Name = "Contribution";
+            this.Contribution.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -227,11 +227,11 @@
 		private TextBox loadLogTextBox;
 		private TabPage tabPage2;
 		private DataGridView dataGridView1;
-		private DataGridViewTextBoxColumn MatchID;
-		private DataGridViewCheckBoxColumn IsVictory;
-		private DataGridViewTextBoxColumn K;
-		private DataGridViewTextBoxColumn D;
-		private DataGridViewTextBoxColumn KD;
-		private DataGridViewTextBoxColumn Cont;
-	}
+        private DataGridViewTextBoxColumn MatchID;
+        private DataGridViewCheckBoxColumn Victory;
+        private DataGridViewTextBoxColumn Kills;
+        private DataGridViewTextBoxColumn Deaths;
+        private DataGridViewTextBoxColumn KDR;
+        private DataGridViewTextBoxColumn Contribution;
+    }
 }
