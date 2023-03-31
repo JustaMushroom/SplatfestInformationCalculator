@@ -120,6 +120,8 @@ namespace SplatfestInformationCalculator
 				}
 			}
 
+			Dictionary<string, TricolorTeam> preferredPos = ContributionCalculator.GeneratePreferredPositions(data.Options, data.Halftime1st);
+
 			JsonNode matchListNode = JsonNode.Parse(jsonStr)!;
 
 			loadLogTextBox.Text += "Received " + matchListNode!.AsArray().Count + " matches from stat.ink" + Environment.NewLine;
@@ -134,14 +136,24 @@ namespace SplatfestInformationCalculator
 				if (node["our_team_percent"] == null) continue;
 
 				SplatfestMatch m;
+				float cont = 0;
 
 				if (node["rule"]!["key"]!.ToString() == "tricolor")
 				{
 					m = new TricolorMatch(node);
+					cont = ContributionCalculator.EstimateTricolorContribution((TricolorMatch)m, preferredPos);
 				}
 				else
 				{
 					m = new SplatfestMatch(node);
+					if (m.Lobby == SplatfestLobbyType.SPLATFEST_OPEN)
+					{
+						cont = ContributionCalculator.EstimateOpenContribution(m);
+					}
+					else if (m.Lobby == SplatfestLobbyType.SPLATFEST_PRO)
+					{
+						cont = ContributionCalculator.EstimateProContribution(m);
+					}
 				}
 				matches.Add(m);
 
@@ -152,8 +164,7 @@ namespace SplatfestInformationCalculator
 				{
 					lobby = "TRICOLOR";
 				}
-				float cont = 0;
-				row.SetValues(new object[] { m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, (float)(m.Kills / m.Deaths), cont });
+				row.SetValues(new object[] { m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, (double)(m.Kills / m.Deaths), cont });
 			}
 
 			loadLogTextBox.Text += "Matches successfully loaded!" + Environment.NewLine;
