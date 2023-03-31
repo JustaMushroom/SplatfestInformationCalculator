@@ -21,7 +21,7 @@ namespace SplatfestInformationCalculator
 			storedMatches = new List<Match>();
 			client = new HttpClient();
 			//Debug.WriteLine(HttpUtility.UrlDecode("https://stat.ink/@AbsentAria/spl3?f%5Blobby%5D=%40splatfest&f%5Brule%5D=&f%5Bmap%5D=&f%5Bweapon%5D=&f%5Bresult%5D=&f%5Bknockout%5D=&f%5Bterm%5D=term&f%5Bterm_from%5D=2023-01-07+00%3A00%3A00&f%5Bterm_to%5D=2023-01-09+00%3A00%3A00"));
-			
+
 			Debug.WriteLine(unixTimestampToDateTime(1676073600).ToString("yyyy-MM-dd HH:mm:ss"));
 		}
 
@@ -37,9 +37,9 @@ namespace SplatfestInformationCalculator
 		private void loadSplatfests()
 		{
 			fests = new List<SplatfestData>();
-            string jsonData = File.ReadAllText("../../../../splatfests.json");
+			string jsonData = File.ReadAllText("../../../../splatfests.json");
 
-            JsonNode matchNode = JsonNode.Parse(jsonData)!;
+			JsonNode matchNode = JsonNode.Parse(jsonData)!;
 
 			foreach (JsonNode node in matchNode["fests"]!.AsArray())
 			{
@@ -49,7 +49,7 @@ namespace SplatfestInformationCalculator
 				if (node["halftime_1st"] != null) ht1 = node["halftime_1st"].ToString();
 
 
-                SplatfestData fest = new SplatfestData()
+				SplatfestData fest = new SplatfestData()
 				{
 					Start = unixTimestampToDateTime((long)node["timing"]!["start"]!),
 					End = unixTimestampToDateTime((long)node["timing"]!["end"]!),
@@ -62,7 +62,7 @@ namespace SplatfestInformationCalculator
 				splatfestComboBox.Items.Add(fest.SplatfestName);
 				fests.Add(fest);
 			}
-        }
+		}
 
 		private string[] jsonArrayToStringArray(JsonArray array)
 		{
@@ -77,21 +77,21 @@ namespace SplatfestInformationCalculator
 
 		private void testSerialization()
 		{
-            string jsonData = File.ReadAllText("../../../../testMatch.json");
+			string jsonData = File.ReadAllText("../../../../testMatch.json");
 
-            JsonNode matchNode = JsonNode.Parse(jsonData)!;
+			JsonNode matchNode = JsonNode.Parse(jsonData)!;
 
-            TricolorMatch match = new TricolorMatch(matchNode);
+			TricolorMatch match = new TricolorMatch(matchNode);
 
 			Console.WriteLine(match);
 		}
 
 		private DateTime unixTimestampToDateTime(long unixTimestamp)
 		{
-            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0);
-            dateTime = dateTime.AddSeconds(unixTimestamp);
+			DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0);
+			dateTime = dateTime.AddSeconds(unixTimestamp);
 			return dateTime;
-        }
+		}
 
 		private async void LoadMatches(string Username, SplatfestData data)
 		{
@@ -164,7 +164,8 @@ namespace SplatfestInformationCalculator
 				{
 					lobby = "TRICOLOR";
 				}
-				row.SetValues(new object[] { m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, (double)(m.Kills / m.Deaths), cont });
+				decimal KD = m.CalulateKD();//Math.Round((decimal)(m.Kills / m.Deaths), 2);
+				row.SetValues(new object[] { m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, KD, cont });
 			}
 
 			loadLogTextBox.Text += "Matches successfully loaded!" + Environment.NewLine;
@@ -187,7 +188,7 @@ namespace SplatfestInformationCalculator
 				return;
 			}
 
-            LoadMatches(username, (SplatfestData)fest);
-        }
+			LoadMatches(username, (SplatfestData)fest);
+		}
 	}
 }

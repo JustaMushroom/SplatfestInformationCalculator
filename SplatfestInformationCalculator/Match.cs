@@ -69,5 +69,14 @@ namespace SplatfestInformationCalculator
 			Deaths = (int)jsonData["death"]!;
 			Specials = (int)jsonData["special"]!;
 		}
+
+		public decimal CalulateKD()
+		{
+			decimal result = 0;
+
+			result = (decimal)KillsAssists / (decimal)Deaths;
+
+			return result;
+		}
 	}
 }
