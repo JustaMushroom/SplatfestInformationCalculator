@@ -73,7 +73,7 @@ namespace SplatfestInformationCalculator
 		public decimal CalulateKD()
 		{
 			decimal result = 0;
-			if (Deaths == 0) return 99.99d;
+			if (Deaths == 0) return 99.99m;
 
 			result = (decimal)KillsAssists / (decimal)Deaths;
 
