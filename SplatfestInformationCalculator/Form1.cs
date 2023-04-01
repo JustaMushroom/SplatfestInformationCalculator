@@ -20,9 +20,32 @@ namespace SplatfestInformationCalculator
 			loadSplatfests();
 			storedMatches = new List<Match>();
 			client = new HttpClient();
-			//Debug.WriteLine(HttpUtility.UrlDecode("https://stat.ink/@AbsentAria/spl3?f%5Blobby%5D=%40splatfest&f%5Brule%5D=&f%5Bmap%5D=&f%5Bweapon%5D=&f%5Bresult%5D=&f%5Bknockout%5D=&f%5Bterm%5D=term&f%5Bterm_from%5D=2023-01-07+00%3A00%3A00&f%5Bterm_to%5D=2023-01-09+00%3A00%3A00"));
 
-			Debug.WriteLine(unixTimestampToDateTime(1676073600).ToString("yyyy-MM-dd HH:mm:ss"));
+			//Uncomment when CellDoubleClick is done
+			//dataGridView1.CellMouseDoubleClick += CellDoubleClick;
+		}
+
+		private void CellDoubleClick(object Sender, DataGridViewCellMouseEventArgs e)
+		{
+			string matchID = (string)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+
+			Match match;
+
+			Match? ma = null;
+			foreach (Match m in storedMatches)
+			{
+				if (m.MatchID == matchID)
+				{
+					ma = m;
+				}
+			}
+			if (ma == null) return;
+
+			match = (Match)ma;
+
+			// TODO: Make new info dialog form for match
+
+			// TODO: Display form using ShowDialog();
 		}
 
 		private SplatfestData? getFestFromName(string SplatfestName)
