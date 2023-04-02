@@ -77,7 +77,7 @@ namespace SplatfestInformationCalculator
 
 			result = (decimal)KillsAssists / (decimal)Deaths;
 
-			return result;
+			return Math.Round(result, 2);
 		}
 	}
 }
