@@ -38,9 +38,10 @@
 			loadLogTextBox = new TextBox();
 			tabPage2 = new TabPage();
 			matchDataGridView1 = new Components.MatchDataGridView();
+			RowID = new DataGridViewTextBoxColumn();
 			dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
 			LobbyType = new DataGridViewTextBoxColumn();
-			Won = new DataGridViewTextBoxColumn();
+			Won = new DataGridViewCheckBoxColumn();
 			KillsAssists = new DataGridViewTextBoxColumn();
 			Deaths = new DataGridViewTextBoxColumn();
 			KD = new DataGridViewTextBoxColumn();
@@ -146,49 +147,68 @@
 			// 
 			// matchDataGridView1
 			// 
+			matchDataGridView1.AllowUserToAddRows = false;
+			matchDataGridView1.AllowUserToDeleteRows = false;
 			matchDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			matchDataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, LobbyType, Won, KillsAssists, Deaths, KD, Cont });
+			matchDataGridView1.Columns.AddRange(new DataGridViewColumn[] { RowID, dataGridViewTextBoxColumn1, LobbyType, Won, KillsAssists, Deaths, KD, Cont });
 			matchDataGridView1.Dock = DockStyle.Fill;
 			matchDataGridView1.Location = new Point(3, 3);
 			matchDataGridView1.Name = "matchDataGridView1";
+			matchDataGridView1.ReadOnly = true;
 			matchDataGridView1.RowTemplate.Height = 25;
 			matchDataGridView1.Size = new Size(786, 416);
 			matchDataGridView1.TabIndex = 1;
+			// 
+			// RowID
+			// 
+			RowID.HeaderText = "<ROWID>";
+			RowID.Name = "RowID";
+			RowID.ReadOnly = true;
+			RowID.Visible = false;
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			dataGridViewTextBoxColumn1.HeaderText = "Match ID";
 			dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
 			// LobbyType
 			// 
 			LobbyType.HeaderText = "Lobby Type";
 			LobbyType.Name = "LobbyType";
+			LobbyType.ReadOnly = true;
 			// 
 			// Won
 			// 
 			Won.HeaderText = "Victory";
 			Won.Name = "Won";
+			Won.ReadOnly = true;
+			Won.Resizable = DataGridViewTriState.True;
+			Won.SortMode = DataGridViewColumnSortMode.Automatic;
 			// 
 			// KillsAssists
 			// 
 			KillsAssists.HeaderText = "Kills (Assists)";
 			KillsAssists.Name = "KillsAssists";
+			KillsAssists.ReadOnly = true;
 			// 
 			// Deaths
 			// 
 			Deaths.HeaderText = "Deaths";
 			Deaths.Name = "Deaths";
+			Deaths.ReadOnly = true;
 			// 
 			// KD
 			// 
 			KD.HeaderText = "KDR";
 			KD.Name = "KD";
+			KD.ReadOnly = true;
 			// 
 			// Cont
 			// 
 			Cont.HeaderText = "Contribution";
 			Cont.Name = "Cont";
+			Cont.ReadOnly = true;
 			// 
 			// Form1
 			// 
@@ -218,9 +238,10 @@
 		private TextBox loadLogTextBox;
 		private TabPage tabPage2;
 		private Components.MatchDataGridView matchDataGridView1;
+		private DataGridViewTextBoxColumn RowID;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private DataGridViewTextBoxColumn LobbyType;
-		private DataGridViewTextBoxColumn Won;
+		private DataGridViewCheckBoxColumn Won;
 		private DataGridViewTextBoxColumn KillsAssists;
 		private DataGridViewTextBoxColumn Deaths;
 		private DataGridViewTextBoxColumn KD;

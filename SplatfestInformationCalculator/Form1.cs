@@ -126,6 +126,7 @@ namespace SplatfestInformationCalculator
 			List<Match> matches = new List<Match>();
 
 			loadLogTextBox.Text += "Parsing matches..." + Environment.NewLine;
+			int id = 0;
 			foreach (JsonNode node in matchListNode!.AsArray())
 			{
 				if (node == null) continue;
@@ -162,7 +163,8 @@ namespace SplatfestInformationCalculator
 					lobby = "TRICOLOR";
 				}
 				decimal KD = m.CalulateKD();//Math.Round((decimal)(m.Kills / m.Deaths), 2);
-				row.SetValues(new object[] { m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, KD, cont });
+				row.SetValues(new object[] { id, m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, KD, cont });
+				id++;
 			}
 
 			loadLogTextBox.Text += "Matches successfully loaded!" + Environment.NewLine;

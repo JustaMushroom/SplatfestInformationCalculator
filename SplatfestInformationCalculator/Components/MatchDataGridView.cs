@@ -17,7 +17,7 @@ namespace SplatfestInformationCalculator.Components
 
 		private void CellHeaderDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			Sort(null, System.ComponentModel.ListSortDirection.Ascending);
+			this.Sort(this.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
 		}
 
 		private void CellDoubleClick(object Sender, DataGridViewCellMouseEventArgs e)
