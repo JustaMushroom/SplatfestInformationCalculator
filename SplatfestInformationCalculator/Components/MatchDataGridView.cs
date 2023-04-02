@@ -12,7 +12,6 @@ namespace SplatfestInformationCalculator.Components
 		public MatchDataGridView() : base()
 		{
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
-			//Uncomment when CellDoubleClick is done
 			CellMouseDoubleClick += CellDoubleClick;
 		}
 
@@ -40,10 +39,8 @@ namespace SplatfestInformationCalculator.Components
 
 			match = (Match)ma;
 
-			// TODO: Make new info dialog form for match
 			MatchInformationForm infoForm = new MatchInformationForm(match);
 
-			// TODO: Display form using ShowDialog();
 			infoForm.ShowDialog();
 		}
 	}
