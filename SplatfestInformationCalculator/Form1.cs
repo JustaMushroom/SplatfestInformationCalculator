@@ -167,6 +167,7 @@ namespace SplatfestInformationCalculator
 				id++;
 			}
 
+			storedMatches = matches;
 			loadLogTextBox.Text += "Matches successfully loaded!" + Environment.NewLine;
 		}
 

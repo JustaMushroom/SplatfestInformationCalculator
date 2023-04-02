@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace SplatfestInformationCalculator.Components
 		{
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
 			//Uncomment when CellDoubleClick is done
-			//dataGridView1.CellMouseDoubleClick += CellDoubleClick;
+			CellMouseDoubleClick += CellDoubleClick;
 		}
 
 		private void CellHeaderDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -22,7 +23,8 @@ namespace SplatfestInformationCalculator.Components
 
 		private void CellDoubleClick(object Sender, DataGridViewCellMouseEventArgs e)
 		{
-			string matchID = (string)this.Rows[e.RowIndex].Cells[0].Value;
+			Debug.WriteLine("Cell Double Clicked!");
+			string matchID = (string)this.Rows[e.RowIndex].Cells[1].Value;
 
 			Match match;
 
@@ -34,13 +36,19 @@ namespace SplatfestInformationCalculator.Components
 					ma = m;
 				}
 			}
-			if (ma == null) return;
+			if (ma == null)
+			{
+				Debug.WriteLine("Match \"" + matchID + "\" not found");
+				return;
+			} ;
 
 			match = (Match)ma;
 
 			// TODO: Make new info dialog form for match
+			MatchInformationForm infoForm = new MatchInformationForm(match);
 
 			// TODO: Display form using ShowDialog();
+			infoForm.ShowDialog();
 		}
 	}
 }
