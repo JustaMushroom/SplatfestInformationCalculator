@@ -11,7 +11,7 @@ namespace SplatfestInformationCalculator
 {
 	public partial class Form1 : Form
 	{
-		List<Match> storedMatches;
+		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
 		HttpClient client;
 		public Form1()
@@ -20,32 +20,6 @@ namespace SplatfestInformationCalculator
 			loadSplatfests();
 			storedMatches = new List<Match>();
 			client = new HttpClient();
-
-			//Uncomment when CellDoubleClick is done
-			//dataGridView1.CellMouseDoubleClick += CellDoubleClick;
-		}
-
-		private void CellDoubleClick(object Sender, DataGridViewCellMouseEventArgs e)
-		{
-			string matchID = (string)dataGridView1.Rows[e.RowIndex].Cells[0].Value;
-
-			Match match;
-
-			Match? ma = null;
-			foreach (Match m in storedMatches)
-			{
-				if (m.MatchID == matchID)
-				{
-					ma = m;
-				}
-			}
-			if (ma == null) return;
-
-			match = (Match)ma;
-
-			// TODO: Make new info dialog form for match
-
-			// TODO: Display form using ShowDialog();
 		}
 
 		private SplatfestData? getFestFromName(string SplatfestName)
