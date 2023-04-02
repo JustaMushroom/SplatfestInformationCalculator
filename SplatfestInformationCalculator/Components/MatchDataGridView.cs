@@ -24,7 +24,6 @@ namespace SplatfestInformationCalculator.Components
 		private void CellDoubleClick(object Sender, DataGridViewCellMouseEventArgs e)
 		{
 			if (this.Columns[e.ColumnIndex].HeaderCell.RowIndex == e.RowIndex) return;
-			Debug.WriteLine("Cell Double Clicked!");
 			string matchID = (string)this.Rows[e.RowIndex].Cells[1].Value;
 
 			Match match;
@@ -37,11 +36,7 @@ namespace SplatfestInformationCalculator.Components
 					ma = m;
 				}
 			}
-			if (ma == null)
-			{
-				Debug.WriteLine("Match \"" + matchID + "\" not found");
-				return;
-			} ;
+			if (ma == null) return;
 
 			match = (Match)ma;
 
