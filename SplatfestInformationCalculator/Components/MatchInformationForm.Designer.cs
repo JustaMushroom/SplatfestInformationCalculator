@@ -68,7 +68,7 @@
 			Name = "MatchInformationForm";
 			ShowIcon = false;
 			ShowInTaskbar = false;
-			Text = "MatchInformationForm";
+			Text = "Match Information";
 			ResumeLayout(false);
 		}
 
