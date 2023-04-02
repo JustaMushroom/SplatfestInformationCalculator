@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
 			tabControl1 = new TabControl();
 			tabPage1 = new TabPage();
 			splatfestComboBox = new ComboBox();
@@ -38,18 +37,18 @@
 			usernameTextBox = new TextBox();
 			loadLogTextBox = new TextBox();
 			tabPage2 = new TabPage();
-			dataGridView1 = new DataGridView();
-			MatchID = new DataGridViewTextBoxColumn();
+			matchDataGridView1 = new Components.MatchDataGridView();
+			dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
 			LobbyType = new DataGridViewTextBoxColumn();
-			Victory = new DataGridViewCheckBoxColumn();
-			Kills = new DataGridViewTextBoxColumn();
+			Won = new DataGridViewTextBoxColumn();
+			KillsAssists = new DataGridViewTextBoxColumn();
 			Deaths = new DataGridViewTextBoxColumn();
-			KDR = new DataGridViewTextBoxColumn();
-			Contribution = new DataGridViewTextBoxColumn();
+			KD = new DataGridViewTextBoxColumn();
+			Cont = new DataGridViewTextBoxColumn();
 			tabControl1.SuspendLayout();
 			tabPage1.SuspendLayout();
 			tabPage2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)matchDataGridView1).BeginInit();
 			SuspendLayout();
 			// 
 			// tabControl1
@@ -136,7 +135,7 @@
 			// 
 			// tabPage2
 			// 
-			tabPage2.Controls.Add(dataGridView1);
+			tabPage2.Controls.Add(matchDataGridView1);
 			tabPage2.Location = new Point(4, 24);
 			tabPage2.Name = "tabPage2";
 			tabPage2.Padding = new Padding(3);
@@ -145,64 +144,51 @@
 			tabPage2.Text = "Matches List";
 			tabPage2.UseVisualStyleBackColor = true;
 			// 
-			// dataGridView1
+			// matchDataGridView1
 			// 
-			dataGridView1.AllowUserToAddRows = false;
-			dataGridView1.AllowUserToDeleteRows = false;
-			dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridView1.Columns.AddRange(new DataGridViewColumn[] { MatchID, LobbyType, Victory, Kills, Deaths, KDR, Contribution });
-			dataGridView1.Dock = DockStyle.Fill;
-			dataGridView1.Location = new Point(3, 3);
-			dataGridView1.Name = "dataGridView1";
-			dataGridView1.ReadOnly = true;
-			dataGridView1.RowTemplate.Height = 25;
-			dataGridView1.Size = new Size(786, 416);
-			dataGridView1.TabIndex = 0;
+			matchDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			matchDataGridView1.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, LobbyType, Won, KillsAssists, Deaths, KD, Cont });
+			matchDataGridView1.Dock = DockStyle.Fill;
+			matchDataGridView1.Location = new Point(3, 3);
+			matchDataGridView1.Name = "matchDataGridView1";
+			matchDataGridView1.RowTemplate.Height = 25;
+			matchDataGridView1.Size = new Size(786, 416);
+			matchDataGridView1.TabIndex = 1;
 			// 
-			// MatchID
+			// dataGridViewTextBoxColumn1
 			// 
-			MatchID.HeaderText = "Match ID";
-			MatchID.Name = "MatchID";
-			MatchID.ReadOnly = true;
+			dataGridViewTextBoxColumn1.HeaderText = "Match ID";
+			dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
 			// 
 			// LobbyType
 			// 
-			LobbyType.HeaderText = "LobbyType";
+			LobbyType.HeaderText = "Lobby Type";
 			LobbyType.Name = "LobbyType";
-			LobbyType.ReadOnly = true;
 			// 
-			// Victory
+			// Won
 			// 
-			Victory.HeaderText = "Won";
-			Victory.Name = "Victory";
-			Victory.ReadOnly = true;
+			Won.HeaderText = "Victory";
+			Won.Name = "Won";
 			// 
-			// Kills
+			// KillsAssists
 			// 
-			Kills.HeaderText = "Kills";
-			Kills.Name = "Kills";
-			Kills.ReadOnly = true;
+			KillsAssists.HeaderText = "Kills (Assists)";
+			KillsAssists.Name = "KillsAssists";
 			// 
 			// Deaths
 			// 
 			Deaths.HeaderText = "Deaths";
 			Deaths.Name = "Deaths";
-			Deaths.ReadOnly = true;
 			// 
-			// KDR
+			// KD
 			// 
-			dataGridViewCellStyle1.Format = "N2";
-			dataGridViewCellStyle1.NullValue = null;
-			KDR.DefaultCellStyle = dataGridViewCellStyle1;
-			KDR.HeaderText = "KDR";
-			KDR.Name = "KDR";
-			KDR.ReadOnly = true;
+			KD.HeaderText = "KDR";
+			KD.Name = "KD";
 			// 
-			// Contribution
+			// Cont
 			// 
-			Contribution.HeaderText = "Contribution";
-			Contribution.Name = "Contribution";
-			Contribution.ReadOnly = true;
+			Cont.HeaderText = "Contribution";
+			Cont.Name = "Cont";
 			// 
 			// Form1
 			// 
@@ -216,7 +202,7 @@
 			tabPage1.ResumeLayout(false);
 			tabPage1.PerformLayout();
 			tabPage2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+			((System.ComponentModel.ISupportInitialize)matchDataGridView1).EndInit();
 			ResumeLayout(false);
 		}
 
@@ -231,13 +217,13 @@
 		private TextBox usernameTextBox;
 		private TextBox loadLogTextBox;
 		private TabPage tabPage2;
-		private DataGridView dataGridView1;
-		private DataGridViewTextBoxColumn MatchID;
+		private Components.MatchDataGridView matchDataGridView1;
+		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private DataGridViewTextBoxColumn LobbyType;
-		private DataGridViewCheckBoxColumn Victory;
-		private DataGridViewTextBoxColumn Kills;
+		private DataGridViewTextBoxColumn Won;
+		private DataGridViewTextBoxColumn KillsAssists;
 		private DataGridViewTextBoxColumn Deaths;
-		private DataGridViewTextBoxColumn KDR;
-		private DataGridViewTextBoxColumn Contribution;
+		private DataGridViewTextBoxColumn KD;
+		private DataGridViewTextBoxColumn Cont;
 	}
 }

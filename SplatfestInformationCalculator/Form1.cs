@@ -93,7 +93,7 @@ namespace SplatfestInformationCalculator
 		private async void LoadMatches(string Username, SplatfestData data)
 		{
 			loadLogTextBox.Text += "Loading matches for " + Username + "..." + Environment.NewLine;
-			dataGridView1.Rows.Clear();
+			matchDataGridView1.Rows.Clear();
 			string URL = "https://stat.ink/@" + Username + "/spl3/index.json?f[lobby]=@splatfest&f[rule]=&f[map]=&f[weapon]=&f[result]=&f[knockout]=&f[term]=term&f[term_from]=" + data.Start.ToString("yyyy-MM-dd HH:mm:ss") + "&f[term_to]=" + data.End.ToString("yyyy-MM-dd HH:mm:ss");
 			string encodedURL = HttpUtility.UrlEncode(URL);
 
@@ -154,8 +154,8 @@ namespace SplatfestInformationCalculator
 				}
 				matches.Add(m);
 
-				int idx = dataGridView1.Rows.Add();
-				DataGridViewRow row = dataGridView1.Rows[idx];
+				int idx = matchDataGridView1.Rows.Add();
+				DataGridViewRow row = matchDataGridView1.Rows[idx];
 				string lobby = m.Lobby.ToString();
 				if (typeof(TricolorMatch).IsInstanceOfType(m))
 				{
