@@ -28,7 +28,7 @@ namespace SplatfestInformationCalculator.Components
 
 		private new void Show()
 		{
-			base.ShowDialog();
+			ShowDialog();
 		}
 	}
 }
