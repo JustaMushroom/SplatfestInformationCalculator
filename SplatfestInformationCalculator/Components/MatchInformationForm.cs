@@ -18,7 +18,14 @@ namespace SplatfestInformationCalculator.Components
 			InitializeComponent();
 
 			matchURLBox.Text = match.OriginalData["url"]!.ToString();
+			matchURLBox.LinkClicked += LinkClicked;
 		}
+
+		private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(matchURLBox.Text) { UseShellExecute = true});
+		}
+
 		private new void Show() { }
 	}
 }
