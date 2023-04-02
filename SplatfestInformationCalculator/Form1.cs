@@ -93,7 +93,7 @@ namespace SplatfestInformationCalculator
 		private async void LoadMatches(string Username, SplatfestData data)
 		{
 			loadLogTextBox.Text += "Loading matches for " + Username + "..." + Environment.NewLine;
-			matchDataGridView1.Rows.Clear();
+			matchDataGridView1.ClearData();
 			string URL = "https://stat.ink/@" + Username + "/spl3/index.json?f[lobby]=@splatfest&f[rule]=&f[map]=&f[weapon]=&f[result]=&f[knockout]=&f[term]=term&f[term_from]=" + data.Start.ToString("yyyy-MM-dd HH:mm:ss") + "&f[term_to]=" + data.End.ToString("yyyy-MM-dd HH:mm:ss");
 			string encodedURL = HttpUtility.UrlEncode(URL);
 
@@ -126,7 +126,6 @@ namespace SplatfestInformationCalculator
 			List<Match> matches = new List<Match>();
 
 			loadLogTextBox.Text += "Parsing matches..." + Environment.NewLine;
-			int id = 0;
 			foreach (JsonNode node in matchListNode!.AsArray())
 			{
 				if (node == null) continue;
@@ -155,16 +154,7 @@ namespace SplatfestInformationCalculator
 				}
 				matches.Add(m);
 
-				int idx = matchDataGridView1.Rows.Add();
-				DataGridViewRow row = matchDataGridView1.Rows[idx];
-				string lobby = m.Lobby.ToString();
-				if (typeof(TricolorMatch).IsInstanceOfType(m))
-				{
-					lobby = "TRICOLOR";
-				}
-				decimal KD = m.CalulateKD();//Math.Round((decimal)(m.Kills / m.Deaths), 2);
-				row.SetValues(new object[] { id, m.MatchID, lobby, m.Victory, m.Kills, m.Deaths, KD, cont });
-				id++;
+				matchDataGridView1.AddMatch(m, cont);
 			}
 
 			storedMatches = matches;
