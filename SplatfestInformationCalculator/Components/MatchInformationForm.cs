@@ -23,7 +23,7 @@ namespace SplatfestInformationCalculator.Components
 
 		private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(matchURLBox.Text) { UseShellExecute = true});
+			System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(((LinkLabel)sender).Text) { UseShellExecute = true});
 		}
 
 		private new void Show() { }
