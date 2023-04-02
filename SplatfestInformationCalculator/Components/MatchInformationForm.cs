@@ -26,9 +26,6 @@ namespace SplatfestInformationCalculator.Components
 			System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(((LinkLabel)sender).Text) { UseShellExecute = true});
 		}
 
-		private new void Show()
-		{
-			ShowDialog();
-		}
+		private new void Show() { }
 	}
 }
