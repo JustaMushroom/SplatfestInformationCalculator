@@ -43,13 +43,11 @@ namespace SplatfestInformationCalculator
             }
             else if (match.Victory == false)
             {
-                clout -= 1000;
+                clout -= 1000 + (match.TheirTeamInked / 4);
             }
             else if (match.Victory == null) return 0;
 
             clout += match.MyInked;
-
-            clout -= match.TheirTeamInked / 4;
 
             if (match.MatchMult == SplatfestMatchMultiplier.TEN_TIMES) clout *= 10;
             else if (match.MatchMult == SplatfestMatchMultiplier.ONEHUNDRED_TIMES) clout *= 100;
@@ -68,7 +66,7 @@ namespace SplatfestInformationCalculator
 
             if (match.Victory == true)
             {
-                clout += matchPower;
+                return match.CloutDiff;
             }
             else if (match.Victory == false)
             {
@@ -120,7 +118,7 @@ namespace SplatfestInformationCalculator
 
                 float otherAttackerAttempts = 0f;
 
-                if (ourSignalClaims == 1) otherAttackerAttempts = match.GetTeamSignals(otherAttacker) - (avgAttemptsPerSuccessfulClaim * (ESTIMATED_SIGNALS - ourSignalClaims));
+                if (ourSignalClaims >= 1) otherAttackerAttempts = match.GetTeamSignals(otherAttacker) - (avgAttemptsPerSuccessfulClaim * (ESTIMATED_SIGNALS - ourSignalClaims));
 
                 float otherClout = 0;
 
@@ -142,7 +140,7 @@ namespace SplatfestInformationCalculator
 
                 float defenderClout = 0;
 
-                if ((bool)match.Victory)
+                if ((bool)match.Victory == true)
                 {
                     // Apply applicable multipler to other attackers
                     if (otherAttacker == TricolorTeamCtxType.THEIR_TEAM && match.TeamContext.TheirTeam == preferredTeams[match.ThemeContext.TheirTeam]) otherClout *= 1.5f;
@@ -150,13 +148,13 @@ namespace SplatfestInformationCalculator
 
                     // Calculate defender clout
                     if (otherAttacker == TricolorTeamCtxType.THEIR_TEAM) defenderClout = (match.ThirdTeamInked / 4);
-                    if (otherAttacker == TricolorTeamCtxType.THIRD_TEAM) defenderClout = (match.ThirdTeamInked / 4);
+                    if (otherAttacker == TricolorTeamCtxType.THIRD_TEAM) defenderClout = (match.TheirTeamInked / 4);
                 }
-                else
-                {
+                else if ((bool)match.Victory == false)
+				{
                     // Calculate defender clout
                     if (otherAttacker == TricolorTeamCtxType.THEIR_TEAM) defenderClout = 9000 + (match.ThirdTeamInked / 4);
-                    if (otherAttacker == TricolorTeamCtxType.THIRD_TEAM) defenderClout = 9000 + (match.ThirdTeamInked / 4);
+                    if (otherAttacker == TricolorTeamCtxType.THIRD_TEAM) defenderClout = 9000 + (match.TheirTeamInked / 4);
 
                     // Apply applicable multiplier to defenders
                     if (otherAttacker == TricolorTeamCtxType.THEIR_TEAM && match.TeamContext.ThirdTeam == preferredTeams[match.ThemeContext.ThirdTeam]) defenderClout *= 1.5f;
