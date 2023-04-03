@@ -33,7 +33,7 @@ namespace SplatfestInformationCalculator
 
         public static float EstimateOpenContribution(SplatfestMatch match)
         {
-            float clout = 0f;
+            float clout = match.MyInked;
 
             if (match.IsMirror) return 0;
 
@@ -46,8 +46,6 @@ namespace SplatfestInformationCalculator
                 clout -= 1000 + (match.TheirTeamInked / 4);
             }
             else if (match.Victory == null) return 0;
-
-            clout += match.MyInked;
 
             if (match.MatchMult == SplatfestMatchMultiplier.TEN_TIMES) clout *= 10;
             else if (match.MatchMult == SplatfestMatchMultiplier.ONEHUNDRED_TIMES) clout *= 100;
