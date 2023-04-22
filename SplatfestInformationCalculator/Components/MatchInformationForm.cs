@@ -29,7 +29,7 @@ namespace SplatfestInformationCalculator.Components
 				Splatfest_InfoLbl.Text = "Clout change: " + splMatch.CloutDiff;
 				if (splMatch.Lobby == Splatfest.Generics.SplatfestLobbyType.SPLATFEST_PRO)
 				{
-					Splatfest_InfoLbl.Text += "\nFest Power: " + (splMatch.FestPower != null? splMatch.FestPower : "N/A");
+					Splatfest_InfoLbl.Text += "\nFest Power: " + (splMatch.FestPower != null ? splMatch.FestPower : "N/A");
 				}
 				if (typeof(TricolorMatch).IsInstanceOfType(match))
 				{
