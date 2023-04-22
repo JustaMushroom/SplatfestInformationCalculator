@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SplatfestInformationCalculator.Splatfest;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -21,6 +22,24 @@ namespace SplatfestInformationCalculator.Components
 			matchURLBox.LinkClicked += LinkClicked;
 
 			Match_InfoLbl.Text = $"Result: {match.Result}\nInked: {match.MyInked}p\nKills: {match.Kills}\nAssists: {match.Assists}\nDeaths: {match.Deaths}\nKDR: {match.CalulateKD()}\nSpecials: {match.Specials}";
+
+			if (typeof(SplatfestMatch).IsInstanceOfType(match))
+			{
+				SplatfestMatch splMatch = (SplatfestMatch)match;
+				Splatfest_InfoLbl.Text = "Clout change: " + splMatch.CloutDiff;
+				if (splMatch.Lobby == Splatfest.Generics.SplatfestLobbyType.SPLATFEST_PRO)
+				{
+					Splatfest_InfoLbl.Text += "\nFest Power: " + (splMatch.FestPower != null? splMatch.FestPower : "N/A");
+				}
+				if (typeof(TricolorMatch).IsInstanceOfType(match))
+				{
+					Splatfest_InfoLbl.Text += "\nSignal Attempts: " + ((TricolorMatch)match).MySignalAttempts;
+				}
+			}
+			else
+			{
+				Splatfest_InfoLbl.Text = "No Splatfest Information Detected!";
+			}
 		}
 
 		private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
