@@ -22,7 +22,7 @@ namespace SplatfestInformationCalculator.Splatfest
 
 		public SplatfestMatchMultiplier MatchMult;
 
-		private SplatfestMatchMultiplier stringToMultiplier(string key)
+		private static SplatfestMatchMultiplier stringToMultiplier(string key)
 		{
 			switch (key)
 			{
@@ -46,7 +46,7 @@ namespace SplatfestInformationCalculator.Splatfest
 		}
 
 
-		private SplatfestLobbyType mapLobbyType(string lobbyKey)
+		private static SplatfestLobbyType mapLobbyType(string lobbyKey)
 		{
 			switch (lobbyKey)
 			{
