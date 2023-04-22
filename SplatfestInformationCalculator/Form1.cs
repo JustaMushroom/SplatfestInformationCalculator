@@ -16,10 +16,10 @@ namespace SplatfestInformationCalculator
 		HttpClient client;
 		public Form1()
 		{
+			client = new HttpClient();
 			InitializeComponent();
 			loadSplatfests();
 			storedMatches = new List<Match>();
-			client = new HttpClient();
 		}
 
 		private SplatfestData? getFestFromName(string SplatfestName)
@@ -31,10 +31,31 @@ namespace SplatfestInformationCalculator
 			return null;
 		}
 
-		private void loadSplatfests()
+		private async void loadSplatfests()
 		{
 			fests = new List<SplatfestData>();
-			string jsonData = File.ReadAllText("../../../../splatfests.json");
+			//string jsonData = File.ReadAllText("../../../../splatfests.json");
+			string festURL = "https://gist.githubusercontent.com/JustaMushroom/cdae3cc4d10fa078f5a5722750594762/raw/splatfests.json"; // URL to download splatfest data from
+
+			bool error = true;
+			HttpResponseMessage response;
+			string jsonData = "{}";
+			while (error)
+			{
+				try
+				{
+					Debug.WriteLine("Request Splatfest Information...");
+					response = await client.GetAsync(festURL);
+					response.EnsureSuccessStatusCode();
+					jsonData = await response.Content.ReadAsStringAsync();
+					error = false;
+				}
+				catch (HttpRequestException)
+				{
+					Debug.WriteLine("HTTP Error! Retrying...");
+					Thread.Sleep(2500);
+				}
+			}
 
 			JsonNode matchNode = JsonNode.Parse(jsonData)!;
 
