@@ -77,7 +77,7 @@
 			Match_InfoLbl.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
 			Match_InfoLbl.Location = new Point(12, 51);
 			Match_InfoLbl.Name = "Match_InfoLbl";
-			Match_InfoLbl.Size = new Size(327, 54);
+			Match_InfoLbl.Size = new Size(327, 153);
 			Match_InfoLbl.TabIndex = 2;
 			Match_InfoLbl.Text = "<Match Information>";
 			Match_InfoLbl.TextAlign = ContentAlignment.TopCenter;
@@ -86,7 +86,7 @@
 			// 
 			RO_Title_Splatfest.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			RO_Title_Splatfest.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			RO_Title_Splatfest.Location = new Point(12, 105);
+			RO_Title_Splatfest.Location = new Point(12, 204);
 			RO_Title_Splatfest.Name = "RO_Title_Splatfest";
 			RO_Title_Splatfest.Size = new Size(327, 21);
 			RO_Title_Splatfest.TabIndex = 2;
@@ -97,7 +97,7 @@
 			// 
 			Splatfest_InfoLbl.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			Splatfest_InfoLbl.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-			Splatfest_InfoLbl.Location = new Point(12, 126);
+			Splatfest_InfoLbl.Location = new Point(12, 225);
 			Splatfest_InfoLbl.Name = "Splatfest_InfoLbl";
 			Splatfest_InfoLbl.Size = new Size(327, 54);
 			Splatfest_InfoLbl.TabIndex = 2;
@@ -108,7 +108,7 @@
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(351, 219);
+			ClientSize = new Size(351, 302);
 			Controls.Add(Splatfest_InfoLbl);
 			Controls.Add(Match_InfoLbl);
 			Controls.Add(RO_Title_Splatfest);
