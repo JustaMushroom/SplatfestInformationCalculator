@@ -20,7 +20,7 @@ namespace SplatfestInformationCalculator.Components
 			matchURLBox.Text = match.OriginalData["url"]!.ToString();
 			matchURLBox.LinkClicked += LinkClicked;
 
-			Match_InfoLbl.Text = $"Result: {match.Result}\nKills: {match.Kills}\nAssists: {match.Assists}\nDeaths: {match.Deaths}\nKDR: {match.CalulateKD()}\nSpecials: {match.Specials}";
+			Match_InfoLbl.Text = $"Result: {match.Result}\nInked: {match.MyInked}p\nKills: {match.Kills}\nAssists: {match.Assists}\nDeaths: {match.Deaths}\nKDR: {match.CalulateKD()}\nSpecials: {match.Specials}";
 		}
 
 		private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
