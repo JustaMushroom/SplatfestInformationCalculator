@@ -12,13 +12,37 @@ namespace SplatfestInformationCalculator.Components
 	public class MatchDataGridView: DataGridView
 	{
 		int id = 0;
-		public bool PaintRows = false;
+		private bool paintRows = false;
+		public bool PaintRows
+		{
+			get { return paintRows; }
+			set
+			{
+				paintRows = value;
+				OnPaintRowsChanged(new EventArgs());
+			}
+		}
+
+		private EventHandler onPaintRowsChanged;
+
+		public event EventHandler PaintRowsChanged
+		{
+			add
+			{
+				onPaintRowsChanged += value;
+			}
+			remove
+			{
+				onPaintRowsChanged -= value;
+			}
+		}
 
 		public MatchDataGridView() : base()
 		{
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
 			CellMouseDoubleClick += CellDoubleClick;
 			CellPainting += cellPainting;
+			PaintRowsChanged += paintRowsChanged;
 		}
 
 		private void CellHeaderDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -114,6 +138,16 @@ namespace SplatfestInformationCalculator.Components
 			e.Handled = true;
 
 
+		}
+
+		protected virtual void OnPaintRowsChanged(EventArgs e)
+		{
+			onPaintRowsChanged?.Invoke(this, e);
+		}
+
+		private void paintRowsChanged(object sender, EventArgs e)
+		{
+			Invalidate();
 		}
 	}
 }
