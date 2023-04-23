@@ -33,7 +33,8 @@ namespace SplatfestInformationCalculator.Components
 				}
 				if (typeof(TricolorMatch).IsInstanceOfType(match))
 				{
-					Splatfest_InfoLbl.Text += "\nSignal Attempts: " + ((TricolorMatch)match).MySignalAttempts;
+					TricolorMatch triMatch = (TricolorMatch)match;
+					Splatfest_InfoLbl.Text += $"Your Team's signal Attempts: {triMatch.OurSignalAttempts}\nYour Signal Attempts: {triMatch.MySignalAttempts}";
 				}
 			}
 			else
