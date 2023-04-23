@@ -101,6 +101,7 @@ namespace SplatfestInformationCalculator
 
 		private async void LoadMatches(string Username, SplatfestData data)
 		{
+			if (Username.StartsWith("@")) Username = Username.Substring(1);
 			loadLogTextBox.Text += "Loading matches for " + Username + "..." + Environment.NewLine;
 			matchDataGridView1.ClearData();
 			string URL = "https://stat.ink/@" + Username + "/spl3/index.json?f[lobby]=@splatfest&f[rule]=&f[map]=&f[weapon]=&f[result]=&f[knockout]=&f[term]=term&f[term_from]=" + data.Start.ToString("yyyy-MM-dd HH:mm:ss") + "&f[term_to]=" + data.End.ToString("yyyy-MM-dd HH:mm:ss");
