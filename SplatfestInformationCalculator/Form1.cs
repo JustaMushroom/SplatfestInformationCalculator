@@ -1,10 +1,6 @@
 using SplatfestInformationCalculator.Splatfest;
-using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Net.Http;
 using System.Diagnostics;
-using System.Web;
-using System.Runtime.CompilerServices;
 using SplatfestInformationCalculator.Splatfest.Generics;
 
 namespace SplatfestInformationCalculator
@@ -105,7 +101,6 @@ namespace SplatfestInformationCalculator
 			loadLogTextBox.Text += "Loading matches for " + Username + "..." + Environment.NewLine;
 			matchDataGridView1.ClearData();
 			string URL = "https://stat.ink/@" + Username + "/spl3/index.json?f[lobby]=@splatfest&f[rule]=&f[map]=&f[weapon]=&f[result]=&f[knockout]=&f[term]=term&f[term_from]=" + data.Start.ToString("yyyy-MM-dd HH:mm:ss") + "&f[term_to]=" + data.End.ToString("yyyy-MM-dd HH:mm:ss");
-			string encodedURL = HttpUtility.UrlEncode(URL);
 
 			bool error = true;
 			HttpResponseMessage response;
