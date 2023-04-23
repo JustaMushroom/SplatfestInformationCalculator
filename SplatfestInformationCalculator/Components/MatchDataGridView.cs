@@ -73,7 +73,7 @@ namespace SplatfestInformationCalculator.Components
 		private void cellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
 			if (!PaintRows) return;
-			if (e.RowIndex < 0) return;
+			if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 			float cont = (float)Rows[e.RowIndex].Cells["Cont"].Value;
 
 			Rectangle newRect = new Rectangle(e.CellBounds.X + 1, e.CellBounds.Y + 1, e.CellBounds.Width - 4, e.CellBounds.Height - 4);
@@ -97,14 +97,11 @@ namespace SplatfestInformationCalculator.Components
 					{
 						e.Graphics.DrawRectangle(Pens.Salmon, newRect);
 					}
-					else
-					{
-						e.Graphics.DrawRectangle(new Pen(backBrush), newRect);
-					}
 
 					if (e.Value != null)
 					{
-						e.Graphics.DrawString((string)e.Value, e.CellStyle.Font, Brushes.Black, e.CellBounds.X + 2, e.CellBounds.Y + 2, StringFormat.GenericDefault);
+						if (typeof(string).IsInstanceOfType(e.Value)) e.Graphics.DrawString((string)e.Value, e.CellStyle.Font, Brushes.Black, e.CellBounds.X + 2, e.CellBounds.Y + 2, StringFormat.GenericDefault);
+						else e.PaintContent(e.CellBounds);
 					}
 					e.Handled = true;
 				}
