@@ -34,7 +34,7 @@ namespace SplatfestInformationCalculator.Components
 				}
 				else
 				{
-					Splatfest_InfoLbl.Text += "\nMatch Type: " + SplatfestMatch.multiplierToString(splMatch.MatchMult);
+					Splatfest_InfoLbl.Text += "\nMatch Type: " + SplatfestMatch.MultiplierToString(splMatch.MatchMult);
 				}
 				if (splMatch.Lobby == Splatfest.Generics.SplatfestLobbyType.SPLATFEST_PRO)
 				{

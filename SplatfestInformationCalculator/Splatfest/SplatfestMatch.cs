@@ -22,7 +22,7 @@ namespace SplatfestInformationCalculator.Splatfest
 
 		public SplatfestMatchMultiplier MatchMult;
 
-		public static string multiplierToString(SplatfestMatchMultiplier mult)
+		public static string MultiplierToString(SplatfestMatchMultiplier mult)
 		{
 			switch (mult)
 			{
