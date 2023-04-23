@@ -18,7 +18,8 @@ namespace SplatfestInformationCalculator.Components
 		{
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
 			CellMouseDoubleClick += CellDoubleClick;
-			CellPainting += cellPainting;
+			//CellPainting += cellPainting;
+			RowPrePaint += rowPrePaint;
 		}
 
 		private void CellHeaderDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -107,6 +108,32 @@ namespace SplatfestInformationCalculator.Components
 				}
 			}
 
+		}
+
+		private void rowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+		{
+			if (!PaintRows) return;
+			if (e.RowIndex < 0) return;
+			float cont = (float)Rows[e.RowIndex].Cells["Cont"].Value;
+
+			if (cont > 0)
+			{
+				e.Graphics.FillRectangle(Brushes.LightGreen, e.RowBounds);
+			}
+			else if (cont < 0)
+			{
+				e.Graphics.FillRectangle(Brushes.Salmon, e.RowBounds);
+			}
+			else
+			{
+				e.PaintCellsBackground(e.RowBounds, true);
+			}
+
+			e.PaintCells(e.RowBounds, DataGridViewPaintParts.Border);
+
+			e.PaintCellsContent(e.RowBounds);
+
+			e.Handled = true;
 		}
 	}
 }
