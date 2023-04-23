@@ -92,17 +92,6 @@ namespace SplatfestInformationCalculator
 			return outputList.ToArray();
 		}
 
-		private void testSerialization()
-		{
-			string jsonData = File.ReadAllText("../../../../testMatch.json");
-
-			JsonNode matchNode = JsonNode.Parse(jsonData)!;
-
-			TricolorMatch match = new TricolorMatch(matchNode);
-
-			Console.WriteLine(match);
-		}
-
 		private DateTime unixTimestampToDateTime(long unixTimestamp)
 		{
 			DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0);
