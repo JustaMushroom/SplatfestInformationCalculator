@@ -185,5 +185,11 @@ namespace SplatfestInformationCalculator
 
 			LoadMatches(username, (SplatfestData)fest);
 		}
+
+		private void showContributionColorsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			matchDataGridView1.PaintRows = !matchDataGridView1.PaintRows;
+			((ToolStripMenuItem)sender).Checked = matchDataGridView1.PaintRows;
+		}
 	}
 }
