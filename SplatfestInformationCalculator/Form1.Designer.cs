@@ -248,7 +248,7 @@
 			Controls.Add(menuStrip1);
 			MainMenuStrip = menuStrip1;
 			Name = "Form1";
-			Text = "Form1";
+			Text = "Splatfest Contribution Calculator";
 			tabControl1.ResumeLayout(false);
 			tabPage1.ResumeLayout(false);
 			tabPage1.PerformLayout();
