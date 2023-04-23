@@ -79,11 +79,25 @@ namespace SplatfestInformationCalculator.Components
 			// Paint the cell background
 			if (cont > 0)
 			{
-				e.Graphics.FillRectangle(Brushes.LightGreen, e.CellBounds);
+				if ((e.State & DataGridViewElementStates.Selected) != 0)
+				{
+					e.Graphics.FillRectangle(Brushes.Green, e.CellBounds);
+				}
+				else
+				{
+					e.Graphics.FillRectangle(Brushes.LightGreen, e.CellBounds);
+				}
 			}
 			else if (cont < 0)
 			{
-				e.Graphics.FillRectangle(Brushes.Salmon, e.CellBounds);
+				if ((e.State & DataGridViewElementStates.Selected) != 0)
+				{
+					e.Graphics.FillRectangle(Brushes.DarkRed, e.CellBounds);
+				}
+				else
+				{
+					e.Graphics.FillRectangle(Brushes.Salmon, e.CellBounds);
+				}
 			}
 			else
 			{
