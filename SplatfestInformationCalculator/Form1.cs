@@ -13,10 +13,9 @@ namespace SplatfestInformationCalculator
 	{
 		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
-		HttpClient client;
+		public static readonly HttpClient client = new HttpClient();
 		public Form1()
 		{
-			client = new HttpClient();
 			InitializeComponent();
 			loadSplatfests();
 			storedMatches = new List<Match>();
