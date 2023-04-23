@@ -22,6 +22,21 @@ namespace SplatfestInformationCalculator.Splatfest
 
 		public SplatfestMatchMultiplier MatchMult;
 
+		public static string multiplierToString(SplatfestMatchMultiplier mult)
+		{
+			switch (mult)
+			{
+				case SplatfestMatchMultiplier.TEN_TIMES:
+					return "10x";
+				case SplatfestMatchMultiplier.ONEHUNDRED_TIMES:
+					return "100x";
+				case SplatfestMatchMultiplier.THREETHREETHREE_TIMES:
+					return "333x";
+				default:
+					return "1x";
+			}
+		}
+
 		private static SplatfestMatchMultiplier stringToMultiplier(string key)
 		{
 			switch (key)
