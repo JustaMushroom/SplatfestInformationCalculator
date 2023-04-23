@@ -26,7 +26,7 @@ namespace SplatfestInformationCalculator.Components
 			if (typeof(SplatfestMatch).IsInstanceOfType(match))
 			{
 				SplatfestMatch splMatch = (SplatfestMatch)match;
-				Splatfest_InfoLbl.Text = "Clout change: " + splMatch.CloutDiff;
+				Splatfest_InfoLbl.Text = "Clout change: " + (splMatch.IsMirror ? "0 (Mirror Match)" : splMatch.CloutDiff);
 				if (typeof(TricolorMatch).IsInstanceOfType(match))
 				{
 					TricolorMatch triMatch = (TricolorMatch)match;
