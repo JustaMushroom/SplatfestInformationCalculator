@@ -12,10 +12,13 @@ namespace SplatfestInformationCalculator.Components
 	public class MatchDataGridView: DataGridView
 	{
 		int id = 0;
+		public bool PaintRows = false;
+
 		public MatchDataGridView() : base()
 		{
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
 			CellMouseDoubleClick += CellDoubleClick;
+			CellPainting += cellPainting;
 		}
 
 		private void CellHeaderDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -65,6 +68,47 @@ namespace SplatfestInformationCalculator.Components
 			MatchInformationForm infoForm = new MatchInformationForm(match);
 
 			infoForm.ShowDialog();
+		}
+
+		private void cellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+		{
+			if (!PaintRows) return;
+			float cont = (float)Rows[e.RowIndex].Cells["Cont"].Value;
+
+			Rectangle newRect = new Rectangle(e.CellBounds.X + 1, e.CellBounds.Y + 1, e.CellBounds.Width - 4, e.CellBounds.Height - 4);
+
+			using (
+				Brush gridBrush = new SolidBrush(GridColor),
+				backBrush = new SolidBrush(e.CellStyle.BackColor))
+			{
+				using (Pen gridLinePen = new Pen(gridBrush))
+				{
+					e.Graphics.FillRectangle(backBrush, e.CellBounds);
+
+					e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
+					e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+
+					if (cont > 0)
+					{
+						e.Graphics.DrawRectangle(Pens.LightGreen, newRect);
+					}
+					else if (cont < 0)
+					{
+						e.Graphics.DrawRectangle(Pens.Salmon, newRect);
+					}
+					else
+					{
+						e.Graphics.DrawRectangle(new Pen(backBrush), newRect);
+					}
+
+					if (e.Value != null)
+					{
+						e.Graphics.DrawString((string)e.Value, e.CellStyle.Font, Brushes.Black, e.CellBounds.X + 2, e.CellBounds.Y + 2, StringFormat.GenericDefault);
+					}
+					e.Handled = true;
+				}
+			}
+
 		}
 	}
 }
