@@ -73,6 +73,7 @@ namespace SplatfestInformationCalculator.Components
 		private void cellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
 			if (!PaintRows) return;
+			if (e.RowIndex < 0) return;
 			float cont = (float)Rows[e.RowIndex].Cells["Cont"].Value;
 
 			Rectangle newRect = new Rectangle(e.CellBounds.X + 1, e.CellBounds.Y + 1, e.CellBounds.Width - 4, e.CellBounds.Height - 4);
