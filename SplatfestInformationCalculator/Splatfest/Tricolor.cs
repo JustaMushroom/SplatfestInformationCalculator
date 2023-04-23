@@ -26,7 +26,7 @@ namespace SplatfestInformationCalculator.Splatfest
 
 		public TriThemeContext ThemeContext;
 
-		public TricolorTeam? GetTeam(string teamKey)
+		public static TricolorTeam? GetTeam(string teamKey)
 		{
 			switch (teamKey)
 			{
