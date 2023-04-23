@@ -163,8 +163,8 @@ namespace SplatfestInformationCalculator
             }
             else if (match.TeamContext.OurTeam == TricolorTeam.DEFENDER)
             {
-                int theirClout = (300 * (int)Math.Floor((double)7 / 2)) + 2500;
-                int thirdClout = 300 * (int)Math.Floor((double)7 / 2);
+                float theirClout = (300 * (int)Math.Floor((double)7 / 2)) + 2500;
+                float thirdClout = 300 * (int)Math.Floor((double)7 / 2);
 
                 if ((bool)match.Victory)
                 {
@@ -183,7 +183,11 @@ namespace SplatfestInformationCalculator
                         thirdClout += 6000;
                     }
 
-                    return match.CloutDiff - ((theirClout + thirdClout) / 2);
+					// Apply applicable multipler to other attackers
+					if (match.TeamContext.TheirTeam == preferredTeams[match.ThemeContext.TheirTeam]) theirClout *= 1.5f;
+					if (match.TeamContext.ThirdTeam == preferredTeams[match.ThemeContext.ThirdTeam]) thirdClout *= 1.5f;
+
+					return match.CloutDiff - ((theirClout + thirdClout) / 2);
                 }
             }
             return 0;
