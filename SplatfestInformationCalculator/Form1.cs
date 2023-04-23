@@ -2,6 +2,7 @@ using SplatfestInformationCalculator.Splatfest;
 using System.Text.Json.Nodes;
 using System.Diagnostics;
 using SplatfestInformationCalculator.Splatfest.Generics;
+using SplatfestInformationCalculator.Components;
 
 namespace SplatfestInformationCalculator
 {
@@ -15,6 +16,7 @@ namespace SplatfestInformationCalculator
 			InitializeComponent();
 			loadSplatfests();
 			storedMatches = new List<Match>();
+			matchDataGridView1.PaintRowsChanged += showContributionColorsToolStripMenuItem_Changed;
 		}
 
 		private SplatfestData? getFestFromName(string SplatfestName)
@@ -189,7 +191,13 @@ namespace SplatfestInformationCalculator
 		private void showContributionColorsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			matchDataGridView1.PaintRows = !matchDataGridView1.PaintRows;
-			((ToolStripMenuItem)sender).Checked = matchDataGridView1.PaintRows;
+			//((ToolStripMenuItem)sender).Checked = matchDataGridView1.PaintRows;
+		}
+
+		private void showContributionColorsToolStripMenuItem_Changed(object sender, EventArgs e)
+		{
+			MatchDataGridView view = (MatchDataGridView)sender;
+			showContributionColorsToolStripMenuItem.Checked = view.PaintRows;
 		}
 	}
 }
