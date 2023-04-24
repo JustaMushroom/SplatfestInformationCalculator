@@ -50,7 +50,7 @@ namespace SplatfestInformationCalculator
 				catch (HttpRequestException)
 				{
 					Debug.WriteLine("HTTP Error! Retrying...");
-					Thread.Sleep(2500);
+					await Task.Delay(2500);
 				}
 			}
 
@@ -122,7 +122,7 @@ namespace SplatfestInformationCalculator
 				catch (HttpRequestException)
 				{
 					loadLogTextBox.Text += "HTTP request error! Retrying..." + Environment.NewLine;
-					Thread.Sleep(2500);
+					await Task.Delay(2500);
 				}
 			}
 
