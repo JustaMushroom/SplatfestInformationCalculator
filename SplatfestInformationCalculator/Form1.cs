@@ -41,7 +41,7 @@ namespace SplatfestInformationCalculator
 			{
 				try
 				{
-					Debug.WriteLine("Request Splatfest Information...");
+					Debug.WriteLine("Requesting Splatfest Information...");
 					response = await client.GetAsync(festURL);
 					response.EnsureSuccessStatusCode();
 					jsonData = await response.Content.ReadAsStringAsync();
@@ -54,6 +54,7 @@ namespace SplatfestInformationCalculator
 				}
 			}
 
+			Debug.WriteLine("Splatfests Downloaded! Parsing Information...");
 			JsonNode matchNode = JsonNode.Parse(jsonData)!;
 
 			foreach (JsonNode node in matchNode["fests"]!.AsArray())
@@ -77,6 +78,7 @@ namespace SplatfestInformationCalculator
 				splatfestComboBox.Items.Add(fest.SplatfestName);
 				fests.Add(fest);
 			}
+			Debug.WriteLine("Splatfests Loaded!");
 		}
 
 		private string[] jsonArrayToStringArray(JsonArray array)
