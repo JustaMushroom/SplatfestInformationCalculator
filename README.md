@@ -20,7 +20,7 @@ git clone https://github.com/JustaMushroom/SplatfestInformationCalculator.git
 2. Open the solution in Visual Studio
 3. Press Build inside of Visual studio
 
-**Alternatively**
+**Alternatively**  
 2. cd into the repo directory  
 3. Run `dotnet build`
 
