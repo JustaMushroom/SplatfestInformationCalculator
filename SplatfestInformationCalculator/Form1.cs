@@ -12,12 +12,10 @@ namespace SplatfestInformationCalculator
 		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
 		public static readonly HttpClient client = new HttpClient();
-		public static Properties.Settings settings { get; private set; }
 		public Form1()
 		{
-			settings = Properties.Settings.Default;
 			InitializeComponent();
-			Properties.Settings.Default.Save();
+			showContributionColorsToolStripMenuItem.Checked = Properties.Settings.Default.PaintRows;
 			loadSplatfests();
 			storedMatches = new List<Match>();
 			matchDataGridView1.PaintRowsChanged += showContributionColorsToolStripMenuItem_Changed;
@@ -27,7 +25,7 @@ namespace SplatfestInformationCalculator
 		{
 			if (e.CloseReason == CloseReason.ApplicationExitCall || e.CloseReason == CloseReason.UserClosing)
 			{
-				settings.Save();
+				Properties.Settings.Default.Save();
 			}
 		}
 
@@ -44,7 +42,7 @@ namespace SplatfestInformationCalculator
 		{
 			fests = new List<SplatfestData>();
 			//string jsonData = File.ReadAllText("../../../../splatfests.json");
-			string festURL = settings.FestURL; // URL to download splatfest data from
+			string festURL = Properties.Settings.Default.FestURL; // URL to download splatfest data from
 
 			bool error = true;
 			HttpResponseMessage response;
@@ -212,7 +210,7 @@ namespace SplatfestInformationCalculator
 		{
 			MatchDataGridView view = (MatchDataGridView)sender;
 			showContributionColorsToolStripMenuItem.Checked = view.PaintRows;
-			settings.PaintRows = view.PaintRows;
+			Properties.Settings.Default.PaintRows = view.PaintRows;
 		}
 	}
 }

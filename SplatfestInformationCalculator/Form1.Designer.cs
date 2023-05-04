@@ -159,7 +159,6 @@
 			matchDataGridView1.Dock = DockStyle.Fill;
 			matchDataGridView1.Location = new Point(3, 3);
 			matchDataGridView1.Name = "matchDataGridView1";
-			matchDataGridView1.PaintRows = false;
 			matchDataGridView1.ReadOnly = true;
 			matchDataGridView1.RowTemplate.Height = 25;
 			matchDataGridView1.Size = new Size(786, 392);

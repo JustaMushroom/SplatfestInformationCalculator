@@ -1,6 +1,7 @@
 ﻿using SplatfestInformationCalculator.Splatfest;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -12,7 +13,9 @@ namespace SplatfestInformationCalculator.Components
 	public class MatchDataGridView: DataGridView
 	{
 		int id = 0;
-		private bool paintRows = false;
+		
+		private bool paintRows = Properties.Settings.Default.PaintRows;
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public bool PaintRows
 		{
 			get { return paintRows; }
@@ -39,7 +42,6 @@ namespace SplatfestInformationCalculator.Components
 
 		public MatchDataGridView() : base()
 		{
-			paintRows = Form1.settings.PaintRows;
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
 			CellMouseDoubleClick += CellDoubleClick;
 			CellPainting += cellPainting;
