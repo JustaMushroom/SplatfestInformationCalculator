@@ -3,6 +3,7 @@ using System.Text.Json.Nodes;
 using System.Diagnostics;
 using SplatfestInformationCalculator.Splatfest.Generics;
 using SplatfestInformationCalculator.Components;
+using System.Configuration;
 
 namespace SplatfestInformationCalculator
 {
@@ -11,12 +12,23 @@ namespace SplatfestInformationCalculator
 		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
 		public static readonly HttpClient client = new HttpClient();
+		public static Properties.Settings settings { get; private set; }
 		public Form1()
 		{
+			settings = Properties.Settings.Default;
 			InitializeComponent();
+			Properties.Settings.Default.Save();
 			loadSplatfests();
 			storedMatches = new List<Match>();
 			matchDataGridView1.PaintRowsChanged += showContributionColorsToolStripMenuItem_Changed;
+			FormClosing += ExitForm;
+		}
+		private void ExitForm(object sender, FormClosingEventArgs e)
+		{
+			if (e.CloseReason == CloseReason.ApplicationExitCall || e.CloseReason == CloseReason.UserClosing)
+			{
+				settings.Save();
+			}
 		}
 
 		private SplatfestData? getFestFromName(string SplatfestName)
@@ -32,7 +44,7 @@ namespace SplatfestInformationCalculator
 		{
 			fests = new List<SplatfestData>();
 			//string jsonData = File.ReadAllText("../../../../splatfests.json");
-			string festURL = "https://gist.githubusercontent.com/JustaMushroom/cdae3cc4d10fa078f5a5722750594762/raw/splatfests.json"; // URL to download splatfest data from
+			string festURL = settings.FestURL; // URL to download splatfest data from
 
 			bool error = true;
 			HttpResponseMessage response;
@@ -200,6 +212,7 @@ namespace SplatfestInformationCalculator
 		{
 			MatchDataGridView view = (MatchDataGridView)sender;
 			showContributionColorsToolStripMenuItem.Checked = view.PaintRows;
+			settings.PaintRows = view.PaintRows;
 		}
 	}
 }

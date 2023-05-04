@@ -39,6 +39,7 @@ namespace SplatfestInformationCalculator.Components
 
 		public MatchDataGridView() : base()
 		{
+			paintRows = Form1.settings.PaintRows;
 			ColumnHeaderMouseDoubleClick += CellHeaderDoubleClick;
 			CellMouseDoubleClick += CellDoubleClick;
 			CellPainting += cellPainting;
