@@ -12,7 +12,7 @@ namespace SplatfestInformationCalculator.Splatfest
 {
 	public class SplatfestMatch: Match
 	{
-		private static readonly int COLOR_DIFF_THRESHOLD = 5;
+		protected static readonly int COLOR_DIFF_THRESHOLD = 5;
 		public int CloutDiff;
 
 		public float? FestPower;
@@ -101,7 +101,7 @@ namespace SplatfestInformationCalculator.Splatfest
 			Lobby = mapLobbyType(jsonData["lobby"]!["key"]!.ToString());
 		}
 
-		private static List<String> deconstructHexIntoBase16Pairs(string s)
+		protected static List<String> deconstructHexIntoBase16Pairs(string s)
 		{
             return Enumerable.Range(0, (s.Length + 1) / 2)
                 .Select(i =>
