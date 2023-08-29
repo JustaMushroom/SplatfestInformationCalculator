@@ -12,6 +12,12 @@ namespace SplatfestInformationCalculator.Splatfest
 {
 	public class TricolorMatch: SplatfestMatch
 	{
+		private static readonly List<string> mirrorInkColors = new List<string>()
+		{
+			"10b780ff",
+			"a316b0ff",
+			"b45a1eff"
+		};
 		public int ThirdTeamInked;
 
 		public float ThirdTeamPercent;
@@ -107,6 +113,11 @@ namespace SplatfestInformationCalculator.Splatfest
 			ThirdTeamPercent = float.Parse(jsonData["third_team_percent"]!.ToString());
 			MySignalAttempts = (int)jsonData["signal"]!;
 
+			if (jsonData["our_team_theme"] == null)
+			{
+				IsMirror = CalculateIsMirrorFromInkColor(jsonData["our_team_color"]!.ToString());
+			}
+
 			TeamContext = new TriTeamContext()
 			{
 				OurTeam = (TricolorTeam)GetTeam(jsonData["our_team_role"]!["key"]!.ToString())!,
@@ -125,5 +136,20 @@ namespace SplatfestInformationCalculator.Splatfest
 			TheirSignalAttempts = calculateTeamSignalAttempts(jsonData, "their_team_members", TeamContext.TheirTeam);
 			ThirdSignalAttempts = calculateTeamSignalAttempts(jsonData, "third_team_members", TeamContext.ThirdTeam);
 		}
-	}
+
+        public static new bool CalculateIsMirrorFromInkColor(string inkColor)
+        {
+            List<int> inkColorRGBA = deconstructHexIntoBase16Pairs(inkColor).Select<string, int>(i => Convert.ToInt32(i, 16)).ToList();
+            foreach (string regColor in mirrorInkColors)
+            {
+                List<int> regColorRGBA = deconstructHexIntoBase16Pairs(regColor).Select<string, int>(i => Convert.ToInt32(i, 16)).ToList();
+                bool rDiff = Math.Abs(inkColorRGBA[0] - regColorRGBA[0]) < COLOR_DIFF_THRESHOLD;
+                bool gDiff = Math.Abs(inkColorRGBA[1] - regColorRGBA[1]) < COLOR_DIFF_THRESHOLD;
+                bool bDiff = Math.Abs(inkColorRGBA[2] - regColorRGBA[2]) < COLOR_DIFF_THRESHOLD;
+
+                if (rDiff && gDiff && bDiff) return true;
+            }
+            return false;
+        }
+    }
 }
