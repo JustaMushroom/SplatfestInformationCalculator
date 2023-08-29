@@ -104,7 +104,8 @@ namespace SplatfestInformationCalculator
 					End = unixTimestampToDateTime((long)node["timing"]!["end"]!),
 					Options = jsonArrayToStringArray(node["options"]!.AsArray()),
 					Prompt = node["prompt"]!.ToString(),
-					Halftime1st = ht1
+					Halftime1st = ht1,
+					ThemeColors = new Dictionary<string, string>()
 				};
 
 

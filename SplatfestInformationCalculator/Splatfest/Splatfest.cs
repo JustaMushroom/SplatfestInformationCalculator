@@ -14,6 +14,7 @@ namespace SplatfestInformationCalculator.Splatfest
         public string[] Options;
         public string Prompt;
         public string Halftime1st;
+        public Dictionary<string, string> ThemeColors;
 
         public string SplatfestName
         {
