@@ -143,9 +143,9 @@ namespace SplatfestInformationCalculator.Splatfest
             foreach (string regColor in mirrorInkColors)
             {
                 List<int> regColorRGBA = deconstructHexIntoBase16Pairs(regColor).Select<string, int>(i => Convert.ToInt32(i, 16)).ToList();
-                bool rDiff = Math.Abs(inkColorRGBA[0] - regColorRGBA[0]) < COLOR_DIFF_THRESHOLD;
-                bool gDiff = Math.Abs(inkColorRGBA[1] - regColorRGBA[1]) < COLOR_DIFF_THRESHOLD;
-                bool bDiff = Math.Abs(inkColorRGBA[2] - regColorRGBA[2]) < COLOR_DIFF_THRESHOLD;
+                bool rDiff = Math.Abs(inkColorRGBA[0] - regColorRGBA[0]) <= COLOR_DIFF_THRESHOLD;
+                bool gDiff = Math.Abs(inkColorRGBA[1] - regColorRGBA[1]) <= COLOR_DIFF_THRESHOLD;
+                bool bDiff = Math.Abs(inkColorRGBA[2] - regColorRGBA[2]) <= COLOR_DIFF_THRESHOLD;
 
                 if (rDiff && gDiff && bDiff) return true;
             }
