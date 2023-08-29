@@ -11,6 +11,7 @@ namespace SplatfestInformationCalculator
 	{
 		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
+		public SplatfestData LoadedFest { get; private set; }
 		public static readonly HttpClient client = new HttpClient();
 
 		public static List<string> Colors = new List<string>() { // Catalog of default ink colors
@@ -159,7 +160,7 @@ namespace SplatfestInformationCalculator
 					await Task.Delay(2500);
 				}
 			}
-
+			LoadedFest = data;
 			Dictionary<string, TricolorTeam> preferredPos = ContributionCalculator.GeneratePreferredPositions(data.Options, data.Halftime1st);
 
 			JsonNode matchListNode = JsonNode.Parse(jsonStr)!;
