@@ -12,6 +12,7 @@ namespace SplatfestInformationCalculator.Splatfest
 {
 	public class SplatfestMatch: Match
 	{
+		private static readonly int COLOR_DIFF_THRESHOLD = 5;
 		public int CloutDiff;
 
 		public float? FestPower;
@@ -85,12 +86,45 @@ namespace SplatfestInformationCalculator.Splatfest
 			CloutDiff = (int)jsonData["clout_change"]!;
 			FestPower = (float?)jsonData["fest_power"];
 
-			IsMirror = jsonData["our_team_theme"]!.ToString() == jsonData["their_team_theme"]!.ToString();
+			if (jsonData["our_team_theme"] != null)
+			{
+				IsMirror = jsonData["our_team_theme"]!.ToString() == jsonData["their_team_theme"]!.ToString();
+			}
+			else
+			{
+				IsMirror = CalculateIsMirrorFromInkColor(jsonData["our_team_color"]!.ToString());
+			}
 
 			if (jsonData["fest_dragon"] != null) MatchMult = stringToMultiplier(jsonData["fest_dragon"]!["key"]!.ToString());
 			else MatchMult = SplatfestMatchMultiplier.ONE_TIMES;
 
 			Lobby = mapLobbyType(jsonData["lobby"]!["key"]!.ToString());
+		}
+
+		private static List<String> deconstructHexIntoBase16Pairs(string s)
+		{
+            return Enumerable.Range(0, (s.Length + 1) / 2)
+                .Select(i =>
+                    s[i * 2] +
+                    ((i * 2 + 1 < s.Length) ?
+                    s[i * 2 + 1].ToString() :
+                    string.Empty))
+                .ToList();
+        }
+
+		public static bool CalculateIsMirrorFromInkColor(string inkColor)
+		{
+			List<int> inkColorRGBA = deconstructHexIntoBase16Pairs(inkColor).Select<string, int>(i => Convert.ToInt32(i, 16)).ToList();
+			foreach (string regColor in Form1.Colors)
+			{
+				List<int> regColorRGBA = deconstructHexIntoBase16Pairs(regColor).Select<string, int>(i => Convert.ToInt32(i, 16)).ToList();
+                bool rDiff = Math.Abs(inkColorRGBA[0] - regColorRGBA[0]) < COLOR_DIFF_THRESHOLD;
+                bool gDiff = Math.Abs(inkColorRGBA[1] - regColorRGBA[1]) < COLOR_DIFF_THRESHOLD;
+                bool bDiff = Math.Abs(inkColorRGBA[2] - regColorRGBA[2]) < COLOR_DIFF_THRESHOLD;
+
+				if (rDiff && gDiff && bDiff) return true;
+            }
+			return false;
 		}
 
 	}
