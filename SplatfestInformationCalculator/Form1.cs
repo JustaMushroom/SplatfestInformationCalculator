@@ -156,6 +156,7 @@ namespace SplatfestInformationCalculator
 
 				if (node["rule"]!["key"]!.ToString() == "tricolor")
 				{
+					if (Properties.Settings.Default.ProcessTricolor == false) continue;
 					m = new TricolorMatch(node);
 					cont = ContributionCalculator.EstimateTricolorContribution((TricolorMatch)m, preferredPos);
 				}
@@ -163,12 +164,14 @@ namespace SplatfestInformationCalculator
 				{
 					m = new SplatfestMatch(node);
 					if (m.Lobby == SplatfestLobbyType.SPLATFEST_OPEN)
-					{
-						cont = ContributionCalculator.EstimateOpenContribution(m);
+                    {
+                        if (Properties.Settings.Default.ProcessOpen == false) continue;
+                        cont = ContributionCalculator.EstimateOpenContribution(m);
 					}
 					else if (m.Lobby == SplatfestLobbyType.SPLATFEST_PRO)
-					{
-						cont = ContributionCalculator.EstimateProContribution(m);
+                    {
+                        if (Properties.Settings.Default.ProcessPro == false) continue;
+                        cont = ContributionCalculator.EstimateProContribution(m);
 					}
 				}
 				matches.Add(m);
