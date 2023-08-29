@@ -12,7 +12,30 @@ namespace SplatfestInformationCalculator
 		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
 		public static readonly HttpClient client = new HttpClient();
-		public Form1()
+
+		public static List<string> Colors = new List<string>() { // Catalog of default ink colors
+			"1a1aaeff", //BlueYellow [A]
+			"e38d24ff", //BlueYellow [B]
+			"a0c937ff", //GreenPurple [A]
+			"ba30b0ff", //GreenPurple [B]
+			"de6624ff", //OrangeBlue [A]
+			"343bc4ff", //OrangeBlue [B]
+			"cd510aff", //OrangePurple [A]
+			"6e04b6ff", //OrangePurple [B]
+			"c12d74ff", //PinkGreen [A]
+			"2cb721ff", //PinkGreen [B]
+			"1bbeabff", //TurquoisePink [A]
+			"c43a6eff", //TurquoisePink [B]
+			"1ec0adff", //TurquoiseRed [A]
+			"d74b31ff", //TurquoiseRed [B]
+			"d0be08ff", //YellowBlue [A]
+			"3a0ccdff", //YellowBlue [B]
+			"ceb121ff", //YellowPurple [A]
+			"9025c6ff", //YellowPurple [B]
+		};
+
+
+        public Form1()
 		{
 			InitializeComponent();
 			showContributionColorsToolStripMenuItem.Checked = Properties.Settings.Default.PaintRows;
