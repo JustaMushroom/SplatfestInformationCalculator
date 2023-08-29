@@ -168,6 +168,7 @@ namespace SplatfestInformationCalculator
 			List<Match> matches = new List<Match>();
 
 			loadLogTextBox.Text += "Parsing matches..." + Environment.NewLine;
+			int skippedMatches = 0;
 			foreach (JsonNode node in matchListNode!.AsArray())
 			{
 				if (node == null) continue;
@@ -179,7 +180,11 @@ namespace SplatfestInformationCalculator
 
 				if (node["rule"]!["key"]!.ToString() == "tricolor")
 				{
-					if (Properties.Settings.Default.ProcessTricolor == false) continue;
+					if (Properties.Settings.Default.ProcessTricolor == false)
+					{
+						skippedMatches++;
+						continue;
+					}
 					m = new TricolorMatch(node);
 					cont = ContributionCalculator.EstimateTricolorContribution((TricolorMatch)m, preferredPos);
 				}
@@ -188,12 +193,20 @@ namespace SplatfestInformationCalculator
 					m = new SplatfestMatch(node);
 					if (m.Lobby == SplatfestLobbyType.SPLATFEST_OPEN)
                     {
-                        if (Properties.Settings.Default.ProcessOpen == false) continue;
+                        if (Properties.Settings.Default.ProcessOpen == false)
+                        {
+                            skippedMatches++;
+                            continue;
+                        }
                         cont = ContributionCalculator.EstimateOpenContribution(m);
 					}
 					else if (m.Lobby == SplatfestLobbyType.SPLATFEST_PRO)
                     {
-                        if (Properties.Settings.Default.ProcessPro == false) continue;
+                        if (Properties.Settings.Default.ProcessPro == false)
+                        {
+                            skippedMatches++;
+                            continue;
+                        }
                         cont = ContributionCalculator.EstimateProContribution(m);
 					}
 				}
@@ -204,6 +217,7 @@ namespace SplatfestInformationCalculator
 
 			storedMatches = matches;
 			loadLogTextBox.Text += "Matches successfully loaded!" + Environment.NewLine;
+			if (skippedMatches > 0) loadLogTextBox.Text += $"{skippedMatches} Matches were not able to be processed!" + Environment.NewLine;
 		}
 
 		private void button1_Click(object sender, EventArgs e)
