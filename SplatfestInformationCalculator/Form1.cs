@@ -11,7 +11,7 @@ namespace SplatfestInformationCalculator
 	{
 		public static List<Match> storedMatches;
 		List<SplatfestData> fests;
-		public SplatfestData LoadedFest { get; private set; }
+		public static SplatfestData LoadedFest { get; private set; }
 		public static readonly HttpClient client = new HttpClient();
 
 		public static List<string> Colors = new List<string>() { // Catalog of default ink colors
