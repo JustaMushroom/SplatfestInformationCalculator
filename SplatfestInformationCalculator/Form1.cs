@@ -111,6 +111,7 @@ namespace SplatfestInformationCalculator
 						{node["options"]![0]!.ToString(), node["colors"]![0]!.ToString() },
 						{node["options"]![1]!.ToString(), node["colors"]![1]!.ToString() },
 						{node["options"]![2]!.ToString(), node["colors"]![2]!.ToString() },
+						{"Neutral", node["colors"]![3]!.ToString() }
 					}*/
 				};
 
