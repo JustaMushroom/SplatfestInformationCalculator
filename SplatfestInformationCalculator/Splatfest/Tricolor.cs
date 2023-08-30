@@ -169,6 +169,7 @@ namespace SplatfestInformationCalculator.Splatfest
 			float closestDistance = float.MaxValue;
 			foreach(KeyValuePair<string, string> kvp in Form1.LoadedFest.ThemeColors)
 			{
+				if (kvp.Key == "Neutral") continue;
 				List<int> themeColorRGBA = deconstructHexIntoBase16Pairs(kvp.Value).Select(i => Convert.ToInt32(i, 16)).ToList();
 
 				float distance = MathF.Sqrt(((inkColorRGBA[0] - themeColorRGBA[0]) ^ 2) + ((inkColorRGBA[1] - themeColorRGBA[1]) ^ 2) + ((inkColorRGBA[2] - themeColorRGBA[2]) ^ 2));
