@@ -107,6 +107,11 @@ namespace SplatfestInformationCalculator
 					Prompt = node["prompt"]!.ToString(),
 					Halftime1st = ht1,
 					ThemeColors = new Dictionary<string, string>()
+					/*{
+						{node["options"]![0]!.ToString(), node["colors"]![0]!.ToString() },
+						{node["options"]![1]!.ToString(), node["colors"]![1]!.ToString() },
+						{node["options"]![2]!.ToString(), node["colors"]![2]!.ToString() },
+					}*/
 				};
 
 
