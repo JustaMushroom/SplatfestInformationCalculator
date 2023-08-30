@@ -113,10 +113,7 @@ namespace SplatfestInformationCalculator.Splatfest
 			ThirdTeamPercent = float.Parse(jsonData["third_team_percent"]!.ToString());
 			MySignalAttempts = (int)jsonData["signal"]!;
 
-			if (jsonData["our_team_theme"] == null)
-			{
-				IsMirror = CalculateIsMirrorFromInkColor(jsonData["our_team_color"]!.ToString());
-			}
+
 
 			TeamContext = new TriTeamContext()
 			{
@@ -124,13 +121,26 @@ namespace SplatfestInformationCalculator.Splatfest
 				TheirTeam = (TricolorTeam)GetTeam(jsonData["their_team_role"]!["key"]!.ToString())!,
 				ThirdTeam = (TricolorTeam)GetTeam(jsonData["third_team_role"]!["key"]!.ToString())!
 			};
-
-			ThemeContext = new TriThemeContext()
+			if (jsonData["our_team_theme"] == null)
 			{
-				OurTeam = jsonData["our_team_theme"]!.ToString(),
-				TheirTeam = jsonData["their_team_theme"]!.ToString(),
-				ThirdTeam = jsonData["third_team_theme"]!.ToString()
-			};
+				IsMirror = CalculateIsMirrorFromInkColor(jsonData["our_team_color"]!.ToString());
+
+                ThemeContext = new TriThemeContext()
+                {
+                    OurTeam = GetThemeFromInkColor(jsonData["our_team_color"]!.ToString()),
+                    TheirTeam = GetThemeFromInkColor(jsonData["their_team_color"]!.ToString()),
+                    ThirdTeam = GetThemeFromInkColor(jsonData["third_team__color"]!.ToString())
+                };
+            }
+			else
+			{
+				ThemeContext = new TriThemeContext()
+				{
+					OurTeam = jsonData["our_team_theme"]!.ToString(),
+					TheirTeam = jsonData["their_team_theme"]!.ToString(),
+					ThirdTeam = jsonData["third_team_theme"]!.ToString()
+				};
+			}
 
 			OurSignalAttempts = calculateTeamSignalAttempts(jsonData, "our_team_members", TeamContext.OurTeam);
 			TheirSignalAttempts = calculateTeamSignalAttempts(jsonData, "their_team_members", TeamContext.TheirTeam);
