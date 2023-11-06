@@ -197,7 +197,7 @@ namespace SplatfestInformationCalculator
 
 				if (node["rule"]!["key"]!.ToString() == "tricolor")
 				{
-					if (Properties.Settings.Default.ProcessTricolor == false || (node["our_team_theme"] == null && data.ThemeColors != null))
+					if (Properties.Settings.Default.ProcessTricolor == false || (node["our_team_theme"] == null && data.ThemeColors == null))
 					{
 						skippedMatches++;
 						continue;
