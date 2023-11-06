@@ -99,7 +99,15 @@ namespace SplatfestInformationCalculator
 				if (node["halftime_1st"] != null) ht1 = node["halftime_1st"].ToString();
 
 
-				SplatfestData fest = new SplatfestData()
+				SplatfestData fest = node["colors"] == null ? new SplatfestData()
+				{
+					Start = unixTimestampToDateTime((long)node["timing"]!["start"]!),
+					End = unixTimestampToDateTime((long)node["timing"]!["end"]!),
+					Options = jsonArrayToStringArray(node["options"]!.AsArray()),
+					Prompt = node["prompt"]!.ToString(),
+					Halftime1st = ht1,
+					ThemeColors = null
+				} : new SplatfestData()
 				{
 					Start = unixTimestampToDateTime((long)node["timing"]!["start"]!),
 					End = unixTimestampToDateTime((long)node["timing"]!["end"]!),
@@ -107,16 +115,17 @@ namespace SplatfestInformationCalculator
 					Prompt = node["prompt"]!.ToString(),
 					Halftime1st = ht1,
 					ThemeColors = new Dictionary<string, string>()
-					/*{
+					{
 						{node["options"]![0]!.ToString(), node["colors"]![0]!.ToString() },
 						{node["options"]![1]!.ToString(), node["colors"]![1]!.ToString() },
 						{node["options"]![2]!.ToString(), node["colors"]![2]!.ToString() },
 						{"Neutral", node["colors"]![3]!.ToString() }
-					}*/
+					}
 				};
 
 
-				splatfestComboBox.Items.Add(fest.SplatfestName);
+
+                splatfestComboBox.Items.Add(fest.SplatfestName);
 				fests.Add(fest);
 			}
 			Debug.WriteLine("Splatfests Loaded!");
@@ -188,7 +197,7 @@ namespace SplatfestInformationCalculator
 
 				if (node["rule"]!["key"]!.ToString() == "tricolor")
 				{
-					if (Properties.Settings.Default.ProcessTricolor == false)
+					if (Properties.Settings.Default.ProcessTricolor == false || (node["our_team_theme"] == null && data.ThemeColors != null))
 					{
 						skippedMatches++;
 						continue;
