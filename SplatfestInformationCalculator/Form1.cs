@@ -75,7 +75,7 @@ namespace SplatfestInformationCalculator
             {
                 try
                 {
-                    Debug.WriteLine("Requesting Splatfest Information...");
+                    Debug.WriteLine("Downloading Splatfest Information...");
                     response = await client.GetAsync(festURL);
                     response.EnsureSuccessStatusCode();
                     jsonData = await response.Content.ReadAsStringAsync();
