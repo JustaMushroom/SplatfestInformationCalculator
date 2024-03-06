@@ -173,7 +173,7 @@ namespace SplatfestInformationCalculator.Splatfest
 				if (kvp.Key == "Neutral") continue;
 				List<int> themeColorRGBA = deconstructHexIntoBase16Pairs(kvp.Value).Select(i => Convert.ToInt32(i, 16)).ToList();
 
-				float distance = MathF.Sqrt(((inkColorRGBA[0] - themeColorRGBA[0]) ^ 2) + ((inkColorRGBA[1] - themeColorRGBA[1]) ^ 2) + ((inkColorRGBA[2] - themeColorRGBA[2]) ^ 2));
+				float distance = MathF.Sqrt((Math.Abs(inkColorRGBA[0] - themeColorRGBA[0]) ^ 2) + (Math.Abs(inkColorRGBA[1] - themeColorRGBA[1]) ^ 2) + (Math.Abs(inkColorRGBA[2] - themeColorRGBA[2]) ^ 2));
 				if (distance < closestDistance)
 				{
 					closestDistance = distance;
