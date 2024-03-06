@@ -125,12 +125,13 @@ namespace SplatfestInformationCalculator.Splatfest
 			{
 				IsMirror = CalculateIsMirrorFromInkColor(jsonData["our_team_color"]!.ToString());
 
-                ThemeContext = new TriThemeContext()
+				
+                ThemeContext = (!IsMirror)? new TriThemeContext()
                 {
                     OurTeam = GetThemeFromInkColor(jsonData["our_team_color"]!.ToString()),
                     TheirTeam = GetThemeFromInkColor(jsonData["their_team_color"]!.ToString()),
-                    ThirdTeam = GetThemeFromInkColor(jsonData["third_team__color"]!.ToString())
-                };
+                    ThirdTeam = GetThemeFromInkColor(jsonData["third_team_color"]!.ToString())
+                } : new TriThemeContext() { OurTeam = "aaaaa", TheirTeam = "aaaaa", ThirdTeam = "aaaaa" };
             }
 			else
 			{
