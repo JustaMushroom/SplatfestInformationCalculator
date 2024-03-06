@@ -46,6 +46,7 @@ namespace SplatfestInformationCalculator.Components
 			CellMouseDoubleClick += CellDoubleClick;
 			CellPainting += cellPainting;
 			PaintRowsChanged += paintRowsChanged;
+			SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 		}
 
 		private void CellHeaderDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
